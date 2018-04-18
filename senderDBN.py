@@ -21,12 +21,12 @@ import time
 from xml.dom import minidom
 
 
-user = "AB120001"
+user = "AB120002"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "passwordcassa"
-set_ip_server = "146.48.89.197"
-matricola = "88S25000026"
+set_ip_server = "192.168.1.110"
+matricola = "88S25000027"
 
 
 
@@ -88,6 +88,11 @@ def send_chiusura_server():
 	url = "ServerRT/ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ServerRT/></Chiusura>"
 	send_post(content,url)
+	
+def send_forza_chiusura_server():
+	url = "ServerRT/ver1/api/richiesta/chiusura"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ForzaChiusura/></Chiusura>"
+	send_post(content,url)	
     
 def send_apertura_cassa():
 	url = "ServerRT/ver1/api/richiesta/apertura"
@@ -132,7 +137,7 @@ def crea_rettifica(chiusura,data,ora,tkold,ved,ndoc,referenceClosurenumber,refer
 	annullo = 1 #annullo
 	if(doctype == 3):
 		annullo = 0 #reso
-	rettifica = "<RettificaScontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+chiusura+"</NumeroAzzeramento><RiferimentoDocumento><DataRegistrazione>"+data+"</DataRegistrazione><OrarioRegistrazione>"+ora+"</OrarioRegistrazione><NumeroProgressivo>"+str(referenceClosurenumber).zfill(4)+"-"+str(referenceDocnumber).zfill(4)+"</NumeroProgressivo></RiferimentoDocumento>"+ved+"<Annullamento>"+str(annullo)+"</Annullamento></RettificaScontrino>"
+	rettifica = "<RettificaScontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento><RiferimentoDocumento><DataRegistrazione>"+data+"</DataRegistrazione><OrarioRegistrazione>"+ora+"</OrarioRegistrazione><NumeroProgressivo>"+str(referenceClosurenumber).zfill(4)+"-"+str(referenceDocnumber).zfill(4)+"</NumeroProgressivo></RiferimentoDocumento>"+ved+"<Annullamento>"+str(annullo)+"</Annullamento></RettificaScontrino>"
 	cont = tkold+matricola+user+rettifica
 	tk = createhash(cont)
 	send_documento(rettifica,tkold,tk.upper())
@@ -225,7 +230,7 @@ def readers(tok,data,ora):
 			tok = newtk
 			ndoc+=1
 		if(ndoc==3):
-			exit(0)
+			break
 
 
 def createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2):
@@ -250,22 +255,41 @@ def createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquot
 
 
 def creascontrino(chiusura,data,ora,tkold):
-	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>"+chiusura+"</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo20</Descrizione><Importo>29,50</Importo><Quantita>1</Quantita><PrezzoUnitario>29,50</PrezzoUnitario><CodiceIVA><Aliquota>4,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>4,42</Importo><Segno>-</Segno><CodiceIVA><Aliquota>4,00</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli><Dettagli><Vendita><Descrizione>Articolo13</Descrizione><Importo>108,00</Importo><Quantita>6</Quantita><PrezzoUnitario>18,00</PrezzoUnitario><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>3,60</Importo><Segno>-</Segno><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli><Dettagli><Vendita><Descrizione>Articolo10</Descrizione><Importo>76,80</Importo><Quantita>4</Quantita><PrezzoUnitario>19,20</PrezzoUnitario><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>3,84</Importo><Segno>-</Segno><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>300,00</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>97,56</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>202,44</Totale><CorrispettiviIVA><Importo>25,08</Importo><BaseImponibile>24,12</BaseImponibile><Imposta>0,96</Imposta><CodiceIVA><Aliquota>4,00</Aliquota></CodiceIVA></CorrispettiviIVA><CorrispettiviIVA><Importo>72,96</Importo><BaseImponibile>66,33</BaseImponibile><Imposta>6,63</Imposta><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></CorrispettiviIVA><CorrispettiviIVA><Importo>104,40</Importo><BaseImponibile>85,57</BaseImponibile><Imposta>18,83</Imposta><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></CorrispettiviIVA></Scontrino>"
+	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo16</Descrizione><Importo>10,00</Importo><Quantita>1</Quantita><PrezzoUnitario>10,00</PrezzoUnitario><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>10,00</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>10,00</Totale><CorrispettiviIVA><Importo>10,00</Importo><BaseImponibile>9,09</BaseImponibile><Imposta>0,91</Imposta><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></CorrispettiviIVA></Scontrino>"
 	cont = tkold+matricola+user+scontrino
 	tk = createhash(cont)
 	send_documento(scontrino,tkold,tk.upper())
 
 def creascontrino2(chiusura,data,ora,tkold,ved,ndoc):
-	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+chiusura+"</NumeroAzzeramento>"+ved+"</Scontrino>"
+	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento>"+ved+"</Scontrino>"
 	cont = tkold+matricola+user+scontrino
 	tk = createhash(cont)
 	send_documento(scontrino,tkold,tk.upper())
 	return tk.upper()
 
-
-
+def loop_HW():
+	while True:
+		kiusura = send_apertura_cassa()
+		z = str(int(kiusura)+1)
+		#print str(kiu)
+		#exit(0)
+		tokenp = send_ric_token_cassa()
+		creascontrino(z,tokenp[1],tokenp[2],tokenp[0])
+		send_chiusura_cassa()	
+		send_chiusura_server()	
+		time.sleep(19)
+	
+def test():
+	tok = "A45A220E3535EC9729B6589CDAE361F81B02B45C3C1F546F83014BDEC6952514"
+	data = "17042018"
+	ora = "23:43"
+	creascontrino(23,data,ora,tok)
+	
+loop_HW()
+exit(0)	
 send_chiusura_cassa()
-send_chiusura_server()
+#send_forza_chiusura_server()
+#exit(0)
 
 #kiusura = send_apertura_cassa()
 #doc = "<?xmlversion=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Documento><CCDCPrecedente>98C6F5255688BB30393034323031383132393930303032303030303037343830</CCDCPrecedente><PuntoCassa>AB120002</PuntoCassa><Scontrino><Data>09042018</Data><Ora>14:27</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>0000</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo 17</Descrizione><Importo>10,00</Importo><Quantita>5</Quantita><PrezzoUnitario>2,00</PrezzoUnitario><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><Vendita><Descrizione>Articolo 1</Descrizione><Importo>12,20</Importo><Quantita>2</Quantita><PrezzoUnitario>6,10</PrezzoUnitario><CodiceIVA><CodiceEsenzioneIVA>EE</CodiceEsenzioneIVA></CodiceIVA></Vendita></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>22,20</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Non Riscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>22,20</Totale><CorrispettiviIVA><Importo>10,00</Importo><BaseImponibile>8,20</BaseImponibile><Imposta>1,80</Imposta><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></CorrispettiviIVA><CorrispettiviIVA><Importo>12,20</Importo><BaseImponibile>12,20</BaseImponibile><CodiceIVA><CodiceEsenzioneIVA>EE</CodiceEsenzioneIVA></CodiceIVA></CorrispettiviIVA></Scontrino><CCDC>E969321BEDA3638619CE4F085BCBF00345D6DE6560E60D27D4B3058CD5A995F6</CCDC></Documento>"
@@ -281,7 +305,7 @@ ved = readers(tokenp[0],tokenp[1],tokenp[2])
 
 
 send_chiusura_cassa()
-#send_chiusura_server()
+send_chiusura_server()
 exit(0)
 
 
