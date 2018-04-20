@@ -222,7 +222,7 @@ def readers(tok,data,ora):
 			resto = line[22]
 			tk = line[23]
 			assegno = line[24]
-			pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>"+resto+"</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>"+assegno+"</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
+			pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+tk+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>"+resto+"</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>"+assegno+"</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
 			totale = "<Totale>"+line[1]+"</Totale>"
 			#print doctype
 			if(doctype==1):
