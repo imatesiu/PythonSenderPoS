@@ -233,7 +233,7 @@ def readers(tok,data,ora):
 				newtk = crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype)
 			tok = newtk
 			ndoc+=1
-		if(ndoc==6):
+		if(ndoc==12):
 			break
 
 
