@@ -193,25 +193,25 @@ def readers(tok,data,ora):
 				doctype = 3
 		vendita1 = "<Dettagli><Vendita><Descrizione>Articolo1</Descrizione><Importo>"+importosenzasconto+"</Importo><Quantita>1</Quantita><PrezzoUnitario>"+importosenzasconto+"</PrezzoUnitario><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></Vendita></Dettagli>"
 		vendita2 = "<Dettagli><Vendita><Descrizione>Articolo2</Descrizione><Importo>"+importosenzasconto2+"</Importo><Quantita>1</Quantita><PrezzoUnitario>"+importosenzasconto2+"</PrezzoUnitario><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></Vendita></Dettagli>"
-		if("N" in aliquota  ):
+		if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota    ):
 			vendita1 = vendita1.replace("Aliquota","CodiceEsenzioneIVA",2)
-		if("N" in aliquota2  ):
+		if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2    ):
 			vendita2 = vendita2.replace("Aliquota","CodiceEsenzioneIVA",2)
 		sconto1 = ""
 		sconto2 = ""
 		if float(valoresconto.replace(",","."))>0:
 			sconto1 = "<Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>"+valoresconto+"</Importo><Segno>-</Segno><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli>"
-			if("N" in aliquota  ):
+			if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota    ):
 				sconto1 = sconto1.replace("Aliquota","CodiceEsenzioneIVA",2)
 		if float(valoresconto2.replace(",","."))>0:
 			sconto2 = "<Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>"+valoresconto2+"</Importo><Segno>-</Segno><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli>"
-			if("N" in aliquota  ):
+			if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2 ):
 				sconto2 = sconto2.replace("Aliquota","CodiceEsenzioneIVA",2)
 		current = vendita1+sconto1
 		current2 = vendita2+sconto2
 		nline +=1
 		if(tipodocumento!="TOTALE"):
-			taxs = createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2) 
+			taxs = createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2,imponibile,imponibile2) 
 			prev = current
 			prev2 = current2
 		else:	
@@ -233,28 +233,41 @@ def readers(tok,data,ora):
 				newtk = crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype)
 			tok = newtk
 			ndoc+=1
-		if(ndoc==2):
+		if(ndoc==6):
 			break
 
 
-def createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2):
+def createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2,imponibile,imponibile2):
 	tax = ""
 	if aliquota2!=aliquota:
-		tax1 = "<CorrispettiviIVA><Importo>"+importoscontato+"</Importo><BaseImponibile>"+str(float(importoscontato.replace(",","."))-float(imposta.replace(",","."))).replace(".",",")+"</BaseImponibile><Imposta>"+imposta+"</Imposta><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
-		tax2 = "<CorrispettiviIVA><Importo>"+importoscontato2+"</Importo><BaseImponibile>"+str(float(importoscontato2.replace(",","."))-float(imposta2.replace(",","."))).replace(".",",")+"</BaseImponibile><Imposta>"+imposta2+"</Imposta><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
-		if("N" in aliquota  ):
-			tax1 = tax1.replace("Aliquota","CodiceEsenzioneIVA",2)			
-		if("N" in aliquota2 ):
+		if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
+			imponibile = importoscontato
+		if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2   ):
+			imponibile2 = importoscontato2
+		tax1 = "<CorrispettiviIVA><Importo>"+importoscontato+"</Importo><BaseImponibile>"+imponibile+"</BaseImponibile><Imposta>"+imposta+"</Imposta><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
+		tax2 = "<CorrispettiviIVA><Importo>"+importoscontato2+"</Importo><BaseImponibile>"+imponibile2+"</BaseImponibile><Imposta>"+imposta2+"</Imposta><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
+		if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
+			tax1 = tax1.replace("Aliquota","CodiceEsenzioneIVA",2)
+			tax1 = tax1.replace("<Imposta>0,00</Imposta>","")			
+		if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2  ):
 			tax2 = tax2.replace("Aliquota","CodiceEsenzioneIVA",2)
+			tax2 = tax2.replace("<Imposta>0,00</Imposta>","")
 		tax = tax1+tax2
 	else:
+		if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
+			imponibile = importoscontato
+			imponibile2 = importoscontato2
 		imp = float(importoscontato)
 		impost = float(imposta)
+		impo = float(imponibile)
 		imp2 = float(importoscontato2)
 		impost2 = float(imposta2)
-		tax = "<CorrispettiviIVA><Importo>"+(imp+imp2)+"</Importo><BaseImponibile>"+(imp+imp2)-(impost+impost2)+"</BaseImponibile><Imposta>"+(impost+impost2)+"</Imposta><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
-		if("N" in aliquota ):
-			tax = tax.replace("Aliquota","CodiceEsenzioneIVA",2)	
+		impo2 = float(imponibile2)
+		
+		tax = "<CorrispettiviIVA><Importo>"+(imp+imp2)+"</Importo><BaseImponibile>"+(impo+impo2)+"</BaseImponibile><Imposta>"+(impost+impost2)+"</Imposta><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
+		if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
+			tax = tax.replace("Aliquota","CodiceEsenzioneIVA",2)
+			tax = tax.replace("<Imposta>0,00</Imposta>","")
 	return tax
 
 
