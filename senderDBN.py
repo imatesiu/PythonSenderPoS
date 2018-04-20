@@ -25,8 +25,8 @@ user = "AB120002"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "passwordcassa"
-set_ip_server = "192.168.1.110"
-matricola = "88S25000027"
+set_ip_server = "146.48.89.2"
+matricola = "25S88000026"
 
 
 
@@ -218,7 +218,11 @@ def readers(tok,data,ora):
 			pagementoC = line[18]
 			pagementoE = line[19]
 			pagementoCred = line[20]
-			pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
+			totale = line[21]
+			resto = line[22]
+			tk = line[23]
+			assegno = line[24]
+			pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>"+resto+"</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>"+assegno+"</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
 			totale = "<Totale>"+line[1]+"</Totale>"
 			#print doctype
 			if(doctype==1):
@@ -229,7 +233,7 @@ def readers(tok,data,ora):
 				newtk = crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype)
 			tok = newtk
 			ndoc+=1
-		if(ndoc==3):
+		if(ndoc==2):
 			break
 
 
@@ -285,8 +289,8 @@ def test():
 	ora = "23:43"
 	creascontrino(23,data,ora,tok)
 	
-loop_HW()
-exit(0)	
+#loop_HW()
+#exit(0)	
 send_chiusura_cassa()
 #send_forza_chiusura_server()
 #exit(0)
