@@ -22,7 +22,7 @@ import threading
 
 
 
-cassauser = "AB120001"
+cassauser = "AB120002"
 if(len(sys.argv)>2):
 	 cassauser = sys.argv[2] 
 password = "passwordcassa"
@@ -348,15 +348,45 @@ class IlMioThread (threading.Thread):
 		
 	def run(self):
 		self.testFW(self.cassauser,self.password)
+		#self.creacassastart(self.cassauser,self.password)
 
+def thread_pool(password):
+	pool = []
+	onetoten = range(1,4)
+	for i in onetoten:
+		user = "AB12"+str(i).zfill(4)
+		print user 
+		thread = IlMioThread(user, password)
+		pool.append(thread)
+		thread.start()
+		
+	for t in pool:
+		t.join()
+	pool[0].send_chiusura_server("AB120001", password)
 
-
+thread_pool(password)
+exit(0)
 thread1 = IlMioThread(cassauser, password)
 thread1.start()
 
+cassauser2 = "AB120002"
+thread2 = IlMioThread(cassauser2, password)
+thread2.start()
+
+cassauser3 = "AB120003"
+thread3 = IlMioThread(cassauser3, password)
+thread3.start()
+
+cassauser4 = "AB120004"
+thread4 = IlMioThread(cassauser4, password)
+thread4.start()
 
 thread1.join()
-thread1.send_chiusura_server(cassauser4, password)
+thread2.join()
+thread3.join()
+thread4.join()
+
+thread1.send_chiusura_server(cassauser, password)
 #loop_HW(cassauser,password)
 exit(0)	
 
