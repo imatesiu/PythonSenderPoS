@@ -54,6 +54,7 @@ def dateminus(date,ora):
 def send_post(content, url):
 	print "https://"+set_ip_server+"/"+url
 	base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
+	print base64string
 	pem = 'CASogeiTest.cer'
 	response = requests.post('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)	
 	print response.text
@@ -78,7 +79,19 @@ def hmacsha256(key,mess):
 	digest = hmac.new(bytes(key).encode('utf-8'), bytes(mess).encode('utf-8'), digestmod=hashlib.sha256).digest()
 	signature = base64.b64encode(digest)
 	return signature 
+	
 
+def send_newpuntocassa_server(puntocassa):
+	url = "ver1/api/configurazione/puntocassa"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><NuovoPuntoCassa/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
+	send_post(content,url)
+
+	
+def send_delpuntocassa_server(puntocassa):
+	url = "ver1/api/configurazione/puntocassa"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><Rimuovi/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
+	send_post(content,url)	
+	
 def send_stato_server():
 	url = "ServerRT/ver1/api/richiesta/stato/server"
 	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
@@ -162,7 +175,7 @@ def read(filename):
 	del spamReader[0]
 	return spamReader
 
-def readers(tok,data,ora):
+def readers(tok,data,ora,z):
 	spamReader = read(sys.argv[1])
 	nline = 0
 	prev = {}
@@ -245,7 +258,7 @@ def readers(tok,data,ora):
 			tok = newtk
 			ndoc+=1
 			data = dateminus(data,ora)
-		if(ndoc==12):
+		if(ndoc==3):
 			break
 
 
@@ -308,15 +321,25 @@ def loop_HW():
 		send_chiusura_server()	
 		time.sleep(19)
 	
-def test():
-	tok = "A45A220E3535EC9729B6589CDAE361F81B02B45C3C1F546F83014BDEC6952514"
-	data = "17042018"
-	ora = "23:43"
-	creascontrino(23,data,ora,tok)
+
 	
+	
+def testFW():
+	send_chiusura_cassa()
+	kiusura = send_apertura_cassa()
+	z = str(int(kiusura)+1)
+	tokenp = send_ric_token_cassa()
+	ved = readers(tokenp[0],tokenp[1],tokenp[2],z)
+	send_chiusura_cassa()
+	send_chiusura_server()
+	
+	
+
+
+testFW()
 #loop_HW()
-#exit(0)	
-send_chiusura_cassa()
+exit(0)	
+
 #send_forza_chiusura_server()
 #exit(0)
 
@@ -324,17 +347,14 @@ send_chiusura_cassa()
 #doc = "<?xmlversion=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Documento><CCDCPrecedente>98C6F5255688BB30393034323031383132393930303032303030303037343830</CCDCPrecedente><PuntoCassa>AB120002</PuntoCassa><Scontrino><Data>09042018</Data><Ora>14:27</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>0000</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo 17</Descrizione><Importo>10,00</Importo><Quantita>5</Quantita><PrezzoUnitario>2,00</PrezzoUnitario><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><Vendita><Descrizione>Articolo 1</Descrizione><Importo>12,20</Importo><Quantita>2</Quantita><PrezzoUnitario>6,10</PrezzoUnitario><CodiceIVA><CodiceEsenzioneIVA>EE</CodiceEsenzioneIVA></CodiceIVA></Vendita></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>22,20</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Non Riscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>22,20</Totale><CorrispettiviIVA><Importo>10,00</Importo><BaseImponibile>8,20</BaseImponibile><Imposta>1,80</Imposta><CodiceIVA><Aliquota>22,00</Aliquota></CodiceIVA></CorrispettiviIVA><CorrispettiviIVA><Importo>12,20</Importo><BaseImponibile>12,20</BaseImponibile><CodiceIVA><CodiceEsenzioneIVA>EE</CodiceEsenzioneIVA></CodiceIVA></CorrispettiviIVA></Scontrino><CCDC>E969321BEDA3638619CE4F085BCBF00345D6DE6560E60D27D4B3058CD5A995F6</CCDC></Documento>"
 #send_post(doc,url = "ver1/api/invio/documento")
 #exit(0)
-kiusura = send_apertura_cassa()
-z = str(int(kiusura)+1)
+
 #print str(kiu)
 #exit(0)
-tokenp = send_ric_token_cassa()
-ved = readers(tokenp[0],tokenp[1],tokenp[2])
 
 
 
-send_chiusura_cassa()
-send_chiusura_server()
+
+
 exit(0)
 
 
