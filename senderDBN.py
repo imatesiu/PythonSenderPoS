@@ -7,10 +7,9 @@ import time
 from base64 import b64encode
 from requests.auth import HTTPDigestAuth
 from requests.auth import HTTPBasicAuth
-import datetime as date
 import hashlib
 import re
-from datetime import datetime
+import datetime
 import json
 import csv
 import fileinput
@@ -21,7 +20,7 @@ import time
 from xml.dom import minidom
 
 
-user = "AB120002"
+user = "AB120001"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "passwordcassa"
@@ -39,6 +38,18 @@ def createhash2(content):
 	sha256.update(content)
 	return base64.b64encode(sha256.digest())
 
+def dateplus(date,ora):
+	text = str(date)+str(ora)
+	datet = datetime.datetime.strptime(text, '%d%m%Y%H:%M:%S')
+	end_date = datet + datetime.timedelta(days=1)
+	return end_date.strftime('%d%m%Y')
+
+
+def dateminus(date,ora):
+	text = str(date)+str(ora)
+	datet = datetime.datetime.strptime(text, '%d%m%Y%H:%M:%S')
+	end_date = datet - datetime.timedelta(days=1)
+	return end_date.strftime('%d%m%Y')
 
 def send_post(content, url):
 	print "https://"+set_ip_server+"/"+url
@@ -233,6 +244,7 @@ def readers(tok,data,ora):
 				newtk = crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype)
 			tok = newtk
 			ndoc+=1
+			data = dateminus(data,ora)
 		if(ndoc==12):
 			break
 
