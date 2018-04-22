@@ -19,6 +19,9 @@ import base64
 import time
 from xml.dom import minidom
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 user = "AB120001"
 if(len(sys.argv)>2):
@@ -56,7 +59,8 @@ def send_post(content, url):
 	base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
 	print base64string
 	pem = 'CASogeiTest.cer'
-	response = requests.post('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)	
+	#response = requests.post('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)
+	response = requests.post('https://'+set_ip_server+'/'+url,data=content,auth=HTTPBasicAuth(user, password),headers={"Content-Type": "application/xml"}, verify=False)
 	print response.text
 	assert response.status_code == 200
 	return response.text
@@ -136,6 +140,10 @@ def send_ric_token_cassa():
 	Tokens = mydoc.getElementsByTagName("Token")
 	Datas = mydoc.getElementsByTagName("Data")
 	Oras = mydoc.getElementsByTagName("Ora")
+	matricolaread = mydoc.getElementsByTagName("MatricolaRT")
+	if (not matricolaread[0].firstChild.data in matricola):
+		print "matricola del server diversa da quella impostata"
+		exit(0)
 	print Datas[0].firstChild.data
 	print Oras[0].firstChild.data
 	return Tokens[0].firstChild.data,Datas[0].firstChild.data,Oras[0].firstChild.data

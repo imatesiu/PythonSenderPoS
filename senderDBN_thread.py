@@ -20,7 +20,9 @@ import time
 from xml.dom import minidom
 import threading
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 cassauser = "AB120002"
 if(len(sys.argv)>2):
@@ -62,7 +64,8 @@ class IlMioThread (threading.Thread):
 		base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
 		print base64string
 		pem = 'CASogeiTest.cer'
-		response = requests.post('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)	
+		#response = requests.post('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)
+		response = requests.post('https://'+set_ip_server+'/'+url,data=content,auth=HTTPBasicAuth(user, password),headers={"Content-Type": "application/xml"}, verify=False)
 		print response.text
 		assert response.status_code == 200
 		return response.text
@@ -142,6 +145,10 @@ class IlMioThread (threading.Thread):
 		Tokens = mydoc.getElementsByTagName("Token")
 		Datas = mydoc.getElementsByTagName("Data")
 		Oras = mydoc.getElementsByTagName("Ora")
+		matricolaread = mydoc.getElementsByTagName("MatricolaRT")
+		if (not matricolaread[0].firstChild.data in matricola):
+			print "matricola del server diversa da quella impostata"
+			exit(0)
 		print Datas[0].firstChild.data
 		print Oras[0].firstChild.data
 		return Tokens[0].firstChild.data,Datas[0].firstChild.data,Oras[0].firstChild.data
