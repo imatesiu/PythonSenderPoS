@@ -325,7 +325,7 @@ class IlMioThread (threading.Thread):
 		
 	def creacassastart(self,cassa,password):
 		self.send_newpuntocassa_server(cassa,password)
-		self.testFW(user,password)
+		self.testFW(cassa,password)
 		
 		
 	def loop_HW(self,user,password):
