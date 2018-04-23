@@ -275,7 +275,7 @@ def readers(tok,data,ora,z):
 			tok = newtk
 			ndoc+=1
 			data = dateminus(data,ora)
-		if(ndoc==3):
+		if(ndoc==12):
 			break
 
 
@@ -352,10 +352,13 @@ def testFW():
 	
 	
 
-#send_configurazione_serverURL()
+
+send_configurazione_serverURL()
 testFW()
 #loop_HW()
-exit(0)	
+text = raw_input("prompt")  # Python 2
+
+#exit(0)	
 
 #send_forza_chiusura_server()
 #exit(0)

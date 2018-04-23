@@ -238,7 +238,7 @@ class IlMioThread (threading.Thread):
 				typ = rifsplit[0]
 				rifDoc = rifsplit[1]
 				referenceClosurenumber = z
-				referenceDocnumber = rifDoc
+				referenceDocnumber = int(rifDoc)+(loop*11)
 				if(typ == "5"):
 					doctype = 5
 				if(typ == "3"):
@@ -284,14 +284,13 @@ class IlMioThread (threading.Thread):
 					ved =  prev+prev2+totale+taxs
 					newtk = self.crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype,user, password)
 				tok = newtk
-				ndoc+=1
 				data = self.dateminus(data,ora)
-				mod = ndoc % 12
+				mod = ndoc % 11
 				if(mod==0):
 					da = 0
-					ndoc+=1
 					loop =loop+1
-			if (loop==2):
+				ndoc+=1
+			if (loop==4):
 				break
 	
 	
@@ -367,7 +366,6 @@ class IlMioThread (threading.Thread):
 		self.send_chiusura_cassa(user, password)
 		time.sleep(2)
 		kiusura = self.send_apertura_cassa(user, password)
-		time.sleep(2)
 		z = str(int(kiusura)+1)
 		tokenp = self.send_ric_token_cassa(user, password)
 		ved = self.readers(tokenp[0],tokenp[1],tokenp[2],z,user, password)
@@ -380,13 +378,14 @@ class IlMioThread (threading.Thread):
 
 def thread_pool(password):
 	pool = []
-	onetoten = range(1,5)
+	onetoten = range(1,2)
 	for i in onetoten:
 		user = "AB12"+str(i).zfill(4)
 		print user 
 		thread = IlMioThread(user, password)
 		pool.append(thread)
 		print "###########"+user+"###########"
+		time.sleep(2)
 		thread.start()
 		
 	for t in pool:
