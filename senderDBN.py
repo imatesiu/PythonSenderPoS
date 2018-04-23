@@ -28,7 +28,7 @@ if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "passwordcassa"
 set_ip_server = "146.48.89.2"
-matricola = "25S88000026"
+matricola = "88S25000026"
 
 
 
