@@ -101,6 +101,16 @@ class IlMioThread (threading.Thread):
 		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><Rimuovi/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
 		self.send_post(content,url,puntocassa,password)	
 		
+	def send_configurazione_serverURL(self,user,password):
+		url = "ver1/api/configurazione/rete"
+		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
+		send_post(content,url,user,password)
+
+	def read_configurazione_serverURL(self,user,password):
+		url = "ver1/api/richiesta/rete"
+		content = ""
+		send_get(content,url,user,password)
+	
 	def send_stato_server(self,user, password):
 		url = "ServerRT/ver1/api/richiesta/stato/server"
 		content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"

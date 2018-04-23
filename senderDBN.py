@@ -90,6 +90,15 @@ def send_newpuntocassa_server(puntocassa):
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><NuovoPuntoCassa/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
 	send_post(content,url)
 
+def send_configurazione_serverURL():
+	url = "ver1/api/configurazione/rete"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
+	send_post(content,url)
+
+def read_configurazione_serverURL():
+	url = "ver1/api/richiesta/rete"
+	content = ""
+	send_get(content,url)
 	
 def send_delpuntocassa_server(puntocassa):
 	url = "ver1/api/configurazione/puntocassa"
@@ -343,7 +352,7 @@ def testFW():
 	
 	
 
-
+#send_configurazione_serverURL()
 testFW()
 #loop_HW()
 exit(0)	
