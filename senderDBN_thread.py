@@ -29,7 +29,7 @@ if(len(sys.argv)>2):
 	 cassauser = sys.argv[2] 
 password = "passwordcassa"
 set_ip_server = "146.48.89.2"
-matricola = "25S88000026"
+matricola = "88S25000026"
 
 
 
@@ -207,7 +207,11 @@ class IlMioThread (threading.Thread):
 		amount = 0
 		ndoc = 1
 		print "#####"
-		for line in spamReader:
+		da = 0
+		loop = 0
+		max = len(spamReader)
+		while da < max :
+			line = spamReader[da]
 			importosenzasconto = line[0]
 			importoscontato = line[1]
 			imponibile = line[2]
@@ -228,6 +232,7 @@ class IlMioThread (threading.Thread):
 			referenceClosurenumber = -1
 			referenceDocnumber = -1
 			doctype = 1
+			da +=1
 			if('-' in rif ):
 				rifsplit = rif.split("-")
 				typ = rifsplit[0]
@@ -281,7 +286,12 @@ class IlMioThread (threading.Thread):
 				tok = newtk
 				ndoc+=1
 				data = self.dateminus(data,ora)
-			if(ndoc==3):
+				mod = ndoc % 12
+				if(mod==0):
+					da = 0
+					ndoc+=1
+					loop =loop+1
+			if (loop==2):
 				break
 	
 	
@@ -354,9 +364,10 @@ class IlMioThread (threading.Thread):
 		
 		
 	def testFW(self,user,password):
-		print "#####"+user
 		self.send_chiusura_cassa(user, password)
+		time.sleep(2)
 		kiusura = self.send_apertura_cassa(user, password)
+		time.sleep(2)
 		z = str(int(kiusura)+1)
 		tokenp = self.send_ric_token_cassa(user, password)
 		ved = self.readers(tokenp[0],tokenp[1],tokenp[2],z,user, password)
@@ -369,19 +380,22 @@ class IlMioThread (threading.Thread):
 
 def thread_pool(password):
 	pool = []
-	onetoten = range(1,4)
+	onetoten = range(1,5)
 	for i in onetoten:
 		user = "AB12"+str(i).zfill(4)
 		print user 
 		thread = IlMioThread(user, password)
 		pool.append(thread)
+		print "###########"+user+"###########"
 		thread.start()
 		
 	for t in pool:
 		t.join()
+	print pool
 	pool[0].send_chiusura_server("AB120001", password)
 
 thread_pool(password)
+
 exit(0)
 thread1 = IlMioThread(cassauser, password)
 thread1.start()
