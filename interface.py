@@ -35,7 +35,7 @@ pil_image = Image.open("CNR.png")
 
 #get the size of the original image
 width_org, height_org = pil_image.size
-factor = 0.10
+factor = 0.15
 width = int(width_org * factor)
 height = int(height_org * factor)
 pil_image2 = pil_image.resize((width, height), Image.ANTIALIAS)
@@ -51,7 +51,8 @@ class MiaApp:
 		
 		self.mioGenitore = genitore
 		self.mioContenitore1 = Frame(genitore)
-
+		genitore.title("Python RCH Sender")
+		genitore.iconbitmap(r'favicon.ico')
 		
 		Label(self.mioContenitore1, text="Matricola: ").grid(row=0,column=0,pady=5,sticky=W)
 		
