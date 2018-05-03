@@ -129,16 +129,18 @@ class MiaApp:
 
 	def pulsante2Premuto(self):	### (2)
 		print "Gestore di eventi 'pulsante2Premuto'"
-		if self.pulsante1["background"] == "green":
-			self.pulsante1["background"] = "yellow"
-			self.thread.start()
+		if self.pulsante2["background"] == "yellow":
+			self.pulsante2["background"] = "green"
+			self.thread.pause = True
 		else:
-			self.pulsante1["background"] = "green"
-			self.thread.pause()
+			self.pulsante2["background"] = "yellow"
+			self.thread.pause = False
 
 	def pulsante3Premuto(self):	### (2)
 		print "Gestore di eventi 'pulsante2Premuto'"
 		self.send_stop(str(self.e1.get()))
+		self.thread.pause = False
+		self.thread.dead = True
 		#self.mioGenitore.destroy()
 				
 		
@@ -156,6 +158,7 @@ class MiaApp:
 		
 	def pulsanteEPremuto(self):	### (3)
 		print "Gestore di eventi 'pulsante2Premuto_a' (un involucro)"
+		self.thread.dead = True
 		self.mioGenitore.destroy()
 		
 		
@@ -201,6 +204,8 @@ class IlMioThread (threading.Thread):
 		self.second = second
 		self.set_ip_server = ip
 		self.matricola = matr
+		self.dead = False
+		self.pause = False
 	
 	def createhash2(content):
 		sha256 = hashlib.sha256()
@@ -231,57 +236,14 @@ class IlMioThread (threading.Thread):
 		assert response.status_code == 200
 		return response.text
 		
-	def send_get(self,content, url):
-		print "https://"+self.set_ip_server+"/"+url
-		base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
-		pem = 'CASogeiTest.cer'
-		response = requests.get('https://'+self.set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)	
-		print response.text
-		assert response.status_code == 200
-		return response.text
-	
+
 	def createhash(self,content):
 		sha256 = hashlib.sha256()
 		sha256.update(content)
 		return sha256.hexdigest()
 	
-	def hmacsha256(self,key,mess):
-		digest = hmac.new(bytes(key).encode('utf-8'), bytes(mess).encode('utf-8'), digestmod=hashlib.sha256).digest()
-		signature = base64.b64encode(digest)
-		return signature 
-		
-	
-	def send_newpuntocassa_server(self,puntocassa,password):
-		url = "ver1/api/configurazione/puntocassa"
-		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><NuovoPuntoCassa/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
-		self.send_post(content,url,puntocassa, password)
-	
-		
-	def send_delpuntocassa_server(self,puntocassa,password):
-		url = "ver1/api/configurazione/puntocassa"
-		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><Rimuovi/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
-		self.send_post(content,url,puntocassa,password)	
-		
-	def send_configurazione_serverURL(self,user,password):
-		url = "ver1/api/configurazione/rete"
-		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
-		send_post(content,url,user,password)
 
-	def read_configurazione_serverURL(self,user,password):
-		url = "ver1/api/richiesta/rete"
-		content = ""
-		send_get(content,url,user,password)
-	
-	def send_stato_server(self,user, password):
-		url = "ServerRT/ver1/api/richiesta/stato/server"
-		content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
-		self.send_post(content,url,user, password)
-	
-	def send_stato_db(self,user, password):
-		url = "ServerRT/ver1/api/richiesta/stato/db"
-		content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
-		self.send_post(content,url)
-	
+
 		
 	def send_chiusura_cassa(self,user, password):
 		url = "ver1/api/richiesta/chiusura"
@@ -341,154 +303,6 @@ class IlMioThread (threading.Thread):
 		print TotaleGiornalieros[0].firstChild.data
 	
 	
-	def crea_rettifica(self,chiusura,data,ora,tkold,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype,user, password):
-		annullo = 1 #annullo
-		if(doctype == 3):
-			annullo = 0 #reso
-		rettifica = "<RettificaScontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento><RiferimentoDocumento><DataRegistrazione>"+data+"</DataRegistrazione><OrarioRegistrazione>"+ora+"</OrarioRegistrazione><NumeroProgressivo>"+str(referenceClosurenumber).zfill(4)+"-"+str(referenceDocnumber).zfill(4)+"</NumeroProgressivo></RiferimentoDocumento>"+ved+"<Annullamento>"+str(annullo)+"</Annullamento></RettificaScontrino>"
-		cont = tkold+matricola+user+rettifica
-		tk = self.createhash(cont)
-		self.send_documento(rettifica,tkold,tk.upper(),user, password)
-		return tk.upper()
-	
-	
-	
-	def read(self,filename):
-		spamReader = list(csv.reader(open(filename,'U'), delimiter=';'))
-		header = spamReader[0]
-		del spamReader[0]
-		return spamReader
-	
-	def readers(self,tok,data,ora,z,user, password):
-		spamReader = self.read(sys.argv[1])
-		nline = 0
-		prev = {}
-		prev2 = {}
-		taxs = []
-		amount = 0
-		ndoc = 1
-		print "#####"
-		da = 0
-		loop = 0
-		max = len(spamReader)
-		while da < max :
-			line = spamReader[da]
-			importosenzasconto = line[0]
-			importoscontato = line[1]
-			imponibile = line[2]
-			imposta = line[3]
-			aliquota = line[4]
-			percentualesconto = line[5]
-			valoresconto = line[6]
-			tipodocumento = line[7]
-			importosenzasconto2 = line[9]
-			importoscontato2 = line[10]
-			imponibile2 = line[11]
-			imposta2 = line[12]
-			aliquota2 = line[13]
-			percentualesconto2 = line[14]
-			valoresconto2 = line[15]
-			tipodocumento2 = line[16]
-			rif = line[8]
-			referenceClosurenumber = -1
-			referenceDocnumber = -1
-			doctype = 1
-			da +=1
-			if('-' in rif ):
-				rifsplit = rif.split("-")
-				typ = rifsplit[0]
-				rifDoc = rifsplit[1]
-				referenceClosurenumber = z
-				referenceDocnumber = int(rifDoc)+(loop*11)
-				if(typ == "5"):
-					doctype = 5
-				if(typ == "3"):
-					doctype = 3
-			vendita1 = "<Dettagli><Vendita><Descrizione>Articolo1</Descrizione><Importo>"+importosenzasconto+"</Importo><Quantita>1</Quantita><PrezzoUnitario>"+importosenzasconto+"</PrezzoUnitario><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></Vendita></Dettagli>"
-			vendita2 = "<Dettagli><Vendita><Descrizione>Articolo2</Descrizione><Importo>"+importosenzasconto2+"</Importo><Quantita>1</Quantita><PrezzoUnitario>"+importosenzasconto2+"</PrezzoUnitario><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></Vendita></Dettagli>"
-			if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota    ):
-				vendita1 = vendita1.replace("Aliquota","CodiceEsenzioneIVA",2)
-			if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2    ):
-				vendita2 = vendita2.replace("Aliquota","CodiceEsenzioneIVA",2)
-			sconto1 = ""
-			sconto2 = ""
-			if float(valoresconto.replace(",","."))>0:
-				sconto1 = "<Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>"+valoresconto+"</Importo><Segno>-</Segno><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli>"
-				if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota    ):
-					sconto1 = sconto1.replace("Aliquota","CodiceEsenzioneIVA",2)
-			if float(valoresconto2.replace(",","."))>0:
-				sconto2 = "<Dettagli><ModificatoreSuArticolo><Descrizione>Sconto</Descrizione><Importo>"+valoresconto2+"</Importo><Segno>-</Segno><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></ModificatoreSuArticolo></Dettagli>"
-				if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2 ):
-					sconto2 = sconto2.replace("Aliquota","CodiceEsenzioneIVA",2)
-			current = vendita1+sconto1
-			current2 = vendita2+sconto2
-			nline +=1
-			if(tipodocumento!="TOTALE"):
-				taxs = self.createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2,imponibile,imponibile2) 
-				prev = current
-				prev2 = current2
-			else:	
-				pagementoC = line[18]
-				pagementoE = line[19]
-				pagementoCred = line[20]
-				totale = line[21]
-				resto = line[22]
-				tk = line[23]
-				assegno = line[24]
-				pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+tk+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>"+resto+"</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>"+assegno+"</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
-				totale = "<Totale>"+line[1]+"</Totale>"
-				#print doctype
-				if(doctype==1):
-					ved =  prev+prev2+pagare+totale+taxs
-					newtk = self.creascontrino2(z,data,ora,tok,ved,ndoc,user, password)
-				else:
-					ved =  prev+prev2+totale+taxs
-					newtk = self.crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype,user, password)
-				tok = newtk
-				data = self.dateminus(data,ora)
-				mod = ndoc % 11
-				if(mod==0):
-					da = 0
-					loop =loop+1
-				ndoc+=1
-				#time.sleep(1)
-			if (loop==4):
-				break
-	
-	
-	def createTAX(self,importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquota2,imponibile,imponibile2):
-		tax = ""
-		if aliquota2!=aliquota:
-			if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
-				imponibile = importoscontato
-			if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2   ):
-				imponibile2 = importoscontato2
-			tax1 = "<CorrispettiviIVA><Importo>"+importoscontato+"</Importo><BaseImponibile>"+imponibile+"</BaseImponibile><Imposta>"+imposta+"</Imposta><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
-			tax2 = "<CorrispettiviIVA><Importo>"+importoscontato2+"</Importo><BaseImponibile>"+imponibile2+"</BaseImponibile><Imposta>"+imposta2+"</Imposta><CodiceIVA><Aliquota>"+aliquota2+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
-			if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
-				tax1 = tax1.replace("Aliquota","CodiceEsenzioneIVA",2)
-				tax1 = tax1.replace("<Imposta>0,00</Imposta>","")			
-			if("E" in aliquota2 or "N" in aliquota2 or "R" in aliquota2 or "A" in aliquota2  ):
-				tax2 = tax2.replace("Aliquota","CodiceEsenzioneIVA",2)
-				tax2 = tax2.replace("<Imposta>0,00</Imposta>","")
-			tax = tax1+tax2
-		else:
-			if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
-				imponibile = importoscontato
-				imponibile2 = importoscontato2
-			imp = float(importoscontato)
-			impost = float(imposta)
-			impo = float(imponibile)
-			imp2 = float(importoscontato2)
-			impost2 = float(imposta2)
-			impo2 = float(imponibile2)
-			
-			tax = "<CorrispettiviIVA><Importo>"+(imp+imp2)+"</Importo><BaseImponibile>"+(impo+impo2)+"</BaseImponibile><Imposta>"+(impost+impost2)+"</Imposta><CodiceIVA><Aliquota>"+aliquota+"</Aliquota></CodiceIVA></CorrispettiviIVA>"
-			if("E" in aliquota or "N" in aliquota or "R" in aliquota or "A" in aliquota   ):
-				tax = tax.replace("Aliquota","CodiceEsenzioneIVA",2)
-				tax = tax.replace("<Imposta>0,00</Imposta>","")
-		return tax
-	
 	
 	def creascontrino(self,chiusura,data,ora,tkold,user, password):
 		scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo16</Descrizione><Importo>10,00</Importo><Quantita>1</Quantita><PrezzoUnitario>10,00</PrezzoUnitario><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>10,00</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>10,00</Totale><CorrispettiviIVA><Importo>10,00</Importo><BaseImponibile>9,09</BaseImponibile><Imposta>0,91</Imposta><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></CorrispettiviIVA></Scontrino>"
@@ -496,22 +310,11 @@ class IlMioThread (threading.Thread):
 		tk = self.createhash(cont)
 		self.send_documento(scontrino,tkold,tk.upper(),user, password)
 	
-	def creascontrino2(self,chiusura,data,ora,tkold,ved,ndoc,user, password):
-		scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento>"+ved+"</Scontrino>"
-		cont = tkold+matricola+user+scontrino
-		tk = self.createhash(cont)
-		self.send_documento(scontrino,tkold,tk.upper(),user, password)
-		return tk.upper()
-	
-		
-	def creacassastart(self,cassa,password):
-		self.send_newpuntocassa_server(cassa,password)
-		self.testFW(cassa,password)
-		
+
 		
 	def loop_HW(self,user,password,second):
 		self.send_chiusura_cassa(user, password)
-		while True:
+		while not self.dead:
 			kiusura = self.send_apertura_cassa(user, password)
 			z = str(int(kiusura)+1)
 			#print str(kiu)
@@ -521,25 +324,18 @@ class IlMioThread (threading.Thread):
 			self.send_chiusura_cassa(user, password)	
 			self.send_chiusura_server(user, password)	
 			time.sleep(float(second))
+			while(self.pause):
+				time.sleep(5)
 		
-	
-		
-		
-	def testFW(self,user,password):
-		self.send_chiusura_cassa(user, password)
-		tokenp = self.send_ric_token_cassa(user, password)
-		kiusura = self.send_apertura_cassa(user, password)
-		time.sleep(2)
-		z = str(int(kiusura)+1)
-		ved = self.readers(tokenp[0],tokenp[1],tokenp[2],z,user, password)
-		self.send_chiusura_cassa(user, password)
-		#self.send_chiusura_server(user, password)
-		
+
+
+
 	def run(self):
 		self.loop_HW(self.cassauser,self.password,self.second)
 		#self.creacassastart(self.cassauser,self.password)
 		
-		
+
+
 radice = Tk()
 #radice.geometry('{}x{}'.format(460, 350))
 miaApp = MiaApp(radice)
