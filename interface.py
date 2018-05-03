@@ -158,8 +158,10 @@ class MiaApp:
 		
 	def pulsanteEPremuto(self):	### (3)
 		print "Gestore di eventi  (un involucro)"
-		self.thread.dead = True
-		self.thread.pause = False
+		try:
+			self.thread.dead = True
+			self.thread.pause = False
+		except AttributeError: print "Ops"
 		exit(0)
 		
 		
