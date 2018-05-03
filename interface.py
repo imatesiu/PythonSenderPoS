@@ -22,12 +22,24 @@ import threading
 from Tkinter import *
 from ttk import Combobox
 from requests.exceptions import ConnectionError
+from PIL import Image, ImageTk
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
+
+radice = Tk()
+pil_image = Image.open("CNR.png")
+
+#get the size of the original image
+width_org, height_org = pil_image.size
+factor = 0.10
+width = int(width_org * factor)
+height = int(height_org * factor)
+pil_image2 = pil_image.resize((width, height), Image.ANTIALIAS)
+tk_image = ImageTk.PhotoImage(pil_image2)
 class MiaApp:
 
 
@@ -39,7 +51,7 @@ class MiaApp:
 		
 		self.mioGenitore = genitore
 		self.mioContenitore1 = Frame(genitore)
-		self.mioContenitore1.pack()
+
 		
 		Label(self.mioContenitore1, text="Matricola: ").grid(row=0,column=0,pady=5,sticky=W)
 		
@@ -117,7 +129,13 @@ class MiaApp:
 		self.pulsanteinfo.configure(text = "Info", background = "green")
 		self.pulsanteinfo.grid(row=8, column=2)
 		self.pulsanteinfo.focus_force()
-		
+
+
+
+		imglabel = Button(self.mioContenitore1, image=tk_image)
+		imglabel.grid(row=9,column=1) 
+		#imglabel.pack()
+		self.mioContenitore1.pack()
 
 
 
@@ -343,7 +361,7 @@ class IlMioThread (threading.Thread):
 		
 
 
-radice = Tk()
+
 #radice.geometry('{}x{}'.format(460, 350))
 miaApp = MiaApp(radice)
 radice.mainloop()
