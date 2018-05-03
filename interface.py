@@ -23,6 +23,7 @@ from Tkinter import *
 from ttk import Combobox
 from requests.exceptions import ConnectionError
 from PIL import Image, ImageTk
+import tkMessageBox
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -133,11 +134,14 @@ class MiaApp:
 
 
 
-		imglabel = Button(self.mioContenitore1, image=tk_image)
+		imglabel = Button(self.mioContenitore1, image=tk_image, command = self.pulsanteCNR)
 		imglabel.grid(row=9,column=1) 
 		#imglabel.pack()
 		self.mioContenitore1.pack()
 
+
+	def pulsanteCNR(self):
+		tkMessageBox.showinfo("Fiscal Group", "ISTI CNR SSEC Fiscal Group")
 
 
 	def pulsante1Premuto(self):	### (2)
