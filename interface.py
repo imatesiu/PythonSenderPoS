@@ -157,16 +157,17 @@ class MiaApp:
 		
 		
 	def pulsanteEPremuto(self):	### (3)
-		print "Gestore di eventi 'pulsante2Premuto_a' (un involucro)"
+		print "Gestore di eventi  (un involucro)"
 		self.thread.dead = True
-		self.mioGenitore.destroy()
+		self.thread.pause = False
+		exit(0)
 		
 		
 	def send_get(self,ip_server, url, param):
 		print "https://"+ip_server+"/"+url+param
 		#base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
 		#pem = 'CASogeiTest.cer'
-		response = requests.get('https://'+ip_server+'/'+url+param,headers={"Content-Type": "application/xml"}, verify=False)
+		response = requests.get('http://'+ip_server+':9090/'+url+param,headers={"Content-Type": "application/xml"}, verify=False)
 		print response.text
 		assert response.status_code == 200
 		return response.text
