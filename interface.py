@@ -21,6 +21,7 @@ from xml.dom import minidom
 import threading
 from Tkinter import *
 from ttk import Combobox
+from requests.exceptions import ConnectionError
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
@@ -128,36 +129,37 @@ class MiaApp:
 		#	self.pulsante1["background"] = "green"
 
 	def pulsante2Premuto(self):	### (2)
-		print "Gestore di eventi 'pulsante2Premuto'"
-		if self.pulsante2["background"] == "yellow":
-			self.pulsante2["background"] = "green"
-			self.thread.pause = True
-		else:
-			self.pulsante2["background"] = "yellow"
-			self.thread.pause = False
+		print "Gestore di eventi pulsante Pausa Premuto"
+		try:
+			if self.pulsante2["background"] == "yellow":
+				self.pulsante2["background"] = "green"
+				self.thread.pause = True
+			else:
+				self.pulsante2["background"] = "yellow"
+				self.thread.pause = False
+		except AttributeError: print "Ops"
 
 	def pulsante3Premuto(self):	### (2)
-		print "Gestore di eventi 'pulsante2Premuto'"
+		print "Gestore di eventi pulsante Stop Premuto"
 		self.send_stop(str(self.e1.get()))
-		self.thread.pause = False
-		self.thread.dead = True
+		try:
+			self.thread.pause = False
+			self.thread.dead = True
+		except AttributeError: print "Ops"
 		#self.mioGenitore.destroy()
-				
 		
-
-
-
-
+		
 	def pulsanteEPremuto_a(self, evento):	### (3)
 		print "Gestore di eventi 'pulsante2Premuto_a' (un involucro)"
 
 		
 	def pulsanteInfoPremuto(self):	### (3)
+		print "Gestore di eventi pulsante Info Premuto"
 		self.send_getinfo(str(self.e1.get()))
 		
 		
 	def pulsanteEPremuto(self):	### (3)
-		print "Gestore di eventi  (un involucro)"
+		print "Gestore di eventi pulsante Exit Premuto"
 		try:
 			self.thread.dead = True
 			self.thread.pause = False
@@ -167,25 +169,27 @@ class MiaApp:
 		
 	def send_get(self,ip_server, url, param):
 		print "https://"+ip_server+"/"+url+param
-		#base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
-		#pem = 'CASogeiTest.cer'
-		response = requests.get('http://'+ip_server+':9090/'+url+param,headers={"Content-Type": "application/xml"}, verify=False)
-		print response.text
-		assert response.status_code == 200
-		return response.text
+		try:
+			#base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
+			#pem = 'CASogeiTest.cer'
+			response = requests.get('http://'+ip_server+':9090/'+url+param,headers={"Content-Type": "application/xml"}, verify=False)
+			print response.text
+			assert response.status_code == 200
+			return response.text
+		except ConnectionError: print "Problemi di Rete"
+		
 		
 	def send_init(self,matricola,gt,z,prova):
 		#https://localhost/v1/dispositivi/corrispettivi/init/80M08002493?grantot=28.8&desc=Termiche&z=33
 		url = "v1/dispositivi/corrispettivi/init/"
-		print type((matricola))
 		param = matricola+"?grantot="+gt+"&desc="+prova+"&z="+z
 		self.send_get("localhost",url,param)
 		
 	def pulsante1Premuto_a(self, evento):	### (3)
-		print "Gestore di eventi 'pulsante1Premuto_a' (un involucro)"
-		print self.e1.get(),self.e2.get(),self.e3.get(),self.cb3.get()
-		print str(self.e1.get())
-		self.send_init(str(self.e1.get()),self.e4.get(),self.e5.get(),self.cb3.get())
+		print "Gestore di eventi pulsante Start Premuto"
+		gt = self.e4.get()
+		gt = gt.replace(",",".")
+		self.send_init(str(self.e1.get()),gt,self.e5.get(),self.cb3.get())
 		self.thread = IlMioThread("AB120002", "passwordcassa",self.e3.get(),self.e2.get(),self.e1.get())
 		self.thread.start()
 
