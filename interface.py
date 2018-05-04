@@ -41,6 +41,7 @@ width = int(width_org * factor)
 height = int(height_org * factor)
 pil_image2 = pil_image.resize((width, height), Image.ANTIALIAS)
 tk_image = ImageTk.PhotoImage(pil_image2)
+
 class MiaApp:
 
 
@@ -152,13 +153,14 @@ class MiaApp:
 		#	self.pulsante1["background"] = "green"
 
 	def pulsante2Premuto(self):	### (2)
-		print "Gestore di eventi pulsante Pausa Premuto"
 		try:
 			if self.pulsante2["background"] == "yellow":
 				self.pulsante2["background"] = "green"
+				print "Gestore di eventi pulsante Pausa Premuto - Pausa TRUE"
 				self.thread.pause = True
 			else:
 				self.pulsante2["background"] = "yellow"
+				print "Gestore di eventi pulsante Pausa Premuto - Pausa FALSE"
 				self.thread.pause = False
 		except AttributeError: print "Ops"
 
