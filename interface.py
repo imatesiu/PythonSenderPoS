@@ -30,6 +30,7 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
+ip_server_rt = "localhost"
 
 radice = Tk()
 pil_image = Image.open("CNR.png")
@@ -58,7 +59,7 @@ class MiaApp:
 		
 		Label(self.mioContenitore1, text="Matricola: ").grid(row=0,column=0,pady=5,sticky=W)
 		
-		Label(self.mioContenitore1, text="Sent to IP: ").grid(row=1,column=0,pady=5,sticky=W)
+		Label(self.mioContenitore1, text="IP del RT: ").grid(row=1,column=0,pady=5,sticky=W)
 		
 		Label(self.mioContenitore1, text="Intervallo: ").grid(row=2,pady=5,sticky=W)
 		v = StringVar()
@@ -208,7 +209,7 @@ class MiaApp:
 		#https://localhost/v1/dispositivi/corrispettivi/init/80M08002493?grantot=28.8&desc=Termiche&z=33
 		url = "v1/dispositivi/corrispettivi/init/"
 		param = matricola+"?grantot="+gt+"&desc="+prova+"&z="+z
-		self.send_get("localhost",url,param)
+		self.send_get(ip_server_rt,url,param)
 		
 	def pulsante1Premuto_a(self, evento):	### (3)
 		print "Gestore di eventi pulsante Start Premuto"
@@ -221,11 +222,11 @@ class MiaApp:
 	
 	def send_stop(self,matricola):
 		url = "v1/dispositivi/corrispettivi/stop/"
-		self.send_get("localhost",url,matricola)
+		self.send_get(ip_server_rt,url,matricola)
 		
 	def send_getinfo(self,matricola):
 		url = "v1/dispositivi/corrispettivi/info/"
-		self.send_get("localhost",url,matricola)
+		self.send_get(ip_server_rt,url,matricola)
 
 
 class IlMioThread (threading.Thread):
