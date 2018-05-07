@@ -23,11 +23,14 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+admin_user = "admin"
+admin_password = "RCH"
+
 user = "AB120001"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
-password = "passwordcassa"
-set_ip_server = "146.48.89.2"
+password = "aaa"
+set_ip_server = "192.168.1.10"
 matricola = "88S25000026"
 
 
@@ -54,20 +57,20 @@ def dateminus(date,ora):
 	end_date = datet - datetime.timedelta(days=1)
 	return end_date.strftime('%d%m%Y')
 
-def send_post(content, url):
+def send_post(content, url, usr,passw):
 	print "https://"+set_ip_server+"/"+url
-	base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
+	base64string = base64.encodestring('%s:%s' % (usr, passw)).replace('\n', '')
 	print base64string
 	pem = 'CASogeiTest.cer'
 	#response = requests.post('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)
-	response = requests.post('https://'+set_ip_server+'/'+url,data=content,auth=HTTPBasicAuth(user, password),headers={"Content-Type": "application/xml"}, verify=False)
+	response = requests.post('https://'+set_ip_server+'/'+url,data=content,auth=HTTPBasicAuth(usr, passw),headers={"Content-Type": "application/xml"}, verify=False)
 	print response.text
 	assert response.status_code == 200
 	return response.text
 	
-def send_get(content, url):
+def send_get(content, url,usr,passw):
 	print "https://"+set_ip_server+"/"+url
-	base64string = base64.encodestring('%s:%s' % (user, password)).replace('\n', '')
+	base64string = base64.encodestring('%s:%s' % (usr, passw)).replace('\n', '')
 	pem = 'CASogeiTest.cer'
 	response = requests.get('https://'+set_ip_server+'/'+url,data=content,headers={"Content-Type": "application/xml", "Authorization": "BASIC %s" % base64string  }, verify=False)	
 	print response.text
@@ -88,54 +91,54 @@ def hmacsha256(key,mess):
 def send_newpuntocassa_server(puntocassa):
 	url = "ver1/api/configurazione/puntocassa"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><NuovoPuntoCassa/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
-	send_post(content,url)
+	send_post(content, url, admin_user,admin_password)
 
 def send_configurazione_serverURL():
 	url = "ver1/api/configurazione/rete"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
-	send_post(content,url)
+	send_post(content, url, admin_user,admin_password)
 
 def read_configurazione_serverURL():
 	url = "ver1/api/richiesta/rete"
 	content = ""
-	send_get(content,url)
+	send_get(content, url, admin_user,admin_password)
 	
 def send_delpuntocassa_server(puntocassa):
 	url = "ver1/api/configurazione/puntocassa"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><Rimuovi/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
-	send_post(content,url)	
+	send_post(content, url, admin_user,admin_password)
 	
 def send_stato_server():
 	url = "ServerRT/ver1/api/richiesta/stato/server"
 	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
-	send_post(content,url)
+	send_post(content, url, admin_user,admin_password)
 
 def send_stato_db():
 	url = "ServerRT/ver1/api/richiesta/stato/db"
 	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
-	send_post(content,url)
+	send_post(content, url, admin_user,admin_password)
 
     
 def send_chiusura_cassa():
 	url = "ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
-	send_post(content,url)
+	send_post(content,url,user,password)
 
 def send_chiusura_server():
 	url = "ServerRT/ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ServerRT/></Chiusura>"
-	send_post(content,url)
+	send_post(content,url,user,password)
 	
 def send_forza_chiusura_server():
 	url = "ServerRT/ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ForzaChiusura/></Chiusura>"
-	send_post(content,url)	
+	send_post(content,url,user,password)
     
 def send_apertura_cassa():
 	url = "ServerRT/ver1/api/richiesta/apertura"
 	content = "<AperturaPuntoCassa/>"
 	res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ConfermaAperturaPuntoCassa><UltimaChiusura>0000</UltimaChiusura></ConfermaAperturaPuntoCassa>"
-	response = send_post(content,url)
+	response = send_post(content,url,user,password)
 	mydoc = minidom.parseString(response)
 	UltimaChiusura = mydoc.getElementsByTagName("UltimaChiusura")
 	return UltimaChiusura[0].firstChild.data
@@ -144,7 +147,7 @@ def send_ric_token_cassa():
 	url = "ver1/api/richiesta/token"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><RichiestaToken></RichiestaToken>"
 	res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><RestituzioneToken><Token>98C6F5255688BB32393033323031383030303130303030303030303030303030</Token><MatricolaRT>88S25000010</MatricolaRT><PuntoCassa>AB120001</PuntoCassa><DataOra><Data>29032018</Data><Ora>17:47:26</Ora></DataOra></RestituzioneToken>"
-	response = send_post(content,url)
+	response = 	send_post(content,url,user,password)
 	mydoc = minidom.parseString(response)
 	Tokens = mydoc.getElementsByTagName("Token")
 	Datas = mydoc.getElementsByTagName("Data")
@@ -164,7 +167,7 @@ def send_documento(scontrino,cdcp,tk):
 	cc = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Documento><CCDCPrecedente>"+cdcp+"</CCDCPrecedente><PuntoCassa>"+user+"</PuntoCassa>"+scontrino+"<CCDC>"+tk+"</CCDC></Documento>"
 	#res = "<?xmlversion=\"1.0\" encoding=\"UTF-8\"?><ConfermaDocumento><Data>29032018</Data><TotaleGiornaliero>12,20</TotaleGiornaliero><IdentificativoDocumento><NumeroAzzeramento>0001</NumeroAzzeramento><NumeroDocumento>0001</NumeroDocumento></IdentificativoDocumento></ConfermaDocumento>"
 	print cc
-	response = send_post(cc,url)
+	response = send_post(cc,url,user,password)
 	mydoc = minidom.parseString(response)
 	NumeroAzzeramentos = mydoc.getElementsByTagName("NumeroAzzeramento")
 	NumeroDocumentos = mydoc.getElementsByTagName("NumeroDocumento")
@@ -350,12 +353,15 @@ def testFW():
 	send_chiusura_cassa()
 	send_chiusura_server()
 	
-	
 
-
-send_configurazione_serverURL()
-testFW()
-#loop_HW()
+#read_configurazione_serverURL()
+#send_configurazione_serverURL()	
+#read_configurazione_serverURL()
+#exit(0)
+#send_forza_chiusura_server()
+#send_configurazione_serverURL()
+#testFW()
+loop_HW()
 text = raw_input("prompt")  # Python 2
 
 #exit(0)	

@@ -24,6 +24,9 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+admin_user = "admin"
+admin_password = "RCH"
+
 cassauser = "AB120002"
 if(len(sys.argv)>2):
 	 cassauser = sys.argv[2] 
@@ -90,10 +93,10 @@ class IlMioThread (threading.Thread):
 		return signature 
 		
 	
-	def send_newpuntocassa_server(self,puntocassa,password):
+	def send_newpuntocassa_server(self,puntocassa,password,admin_user,admin_password):
 		url = "ver1/api/configurazione/puntocassa"
 		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><NuovoPuntoCassa/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
-		self.send_post(content,url,puntocassa, password)
+		self.send_post(content,url,admin_user,admin_password)
 	
 		
 	def send_delpuntocassa_server(self,puntocassa,password):
@@ -342,7 +345,7 @@ class IlMioThread (threading.Thread):
 		return tk.upper()
 	
 		
-	def creacassastart(self,cassa,password):
+	def creacassastart(self,cassa,password,admin_user,admin_password):
 		self.send_newpuntocassa_server(cassa,password)
 		self.testFW(cassa,password)
 		
@@ -374,7 +377,7 @@ class IlMioThread (threading.Thread):
 		
 	def run(self):
 		self.testFW(self.cassauser,self.password)
-		#self.creacassastart(self.cassauser,self.password)
+		self.creacassastart(self.cassauser,self.password,admin_user,admin_password)
 
 def thread_pool(password):
 	pool = []
