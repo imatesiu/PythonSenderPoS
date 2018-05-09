@@ -31,7 +31,8 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 ip_server_rt = "localhost"
-
+admin_user = "admin"
+admin_password = "RCH"
 radice = Tk()
 pil_image = Image.open("CNR.png")
 
@@ -66,7 +67,7 @@ class MiaApp:
 		v.set("88S25000026")
 		self.e1 = Entry(self.mioContenitore1,textvariable=v)
 		v1 = StringVar()
-		v1.set("146.48.89.2")#192.168.1.146
+		v1.set("192.168.1.11")#192.168.1.146
 		self.e2 = Entry(self.mioContenitore1,textvariable=v1)
 		v2 = StringVar()
 		v2.set("8")
@@ -216,7 +217,7 @@ class MiaApp:
 		gt = self.e4.get()
 		gt = gt.replace(",",".")
 		self.send_init(str(self.e1.get()),gt,self.e5.get(),self.cb3.get())
-		self.thread = IlMioThread("AB120002", "passwordcassa",self.e3.get(),self.e2.get(),self.e1.get())
+		self.thread = IlMioThread("AB120002", "aaa",self.e3.get(),self.e2.get(),self.e1.get())
 		self.thread.start()
 
 	
@@ -293,6 +294,11 @@ class IlMioThread (threading.Thread):
 		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ForzaChiusura/></Chiusura>"
 		self.send_post(content,url,user, password)	
 		
+	def send_configurazione_serverURL(self):
+		url = "ver1/api/configurazione/rete"
+		content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
+		self.send_post(content, url, admin_user,admin_password)
+		
 	def send_apertura_cassa(self,user, password):
 		url = "ServerRT/ver1/api/richiesta/apertura"
 		content = "<AperturaPuntoCassa/>"
@@ -346,6 +352,7 @@ class IlMioThread (threading.Thread):
 
 		
 	def loop_HW(self,user,password,second):
+		self.send_configurazione_serverURL();
 		self.send_chiusura_cassa(user, password)
 		while not self.dead:
 			kiusura = self.send_apertura_cassa(user, password)
