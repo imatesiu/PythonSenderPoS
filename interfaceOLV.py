@@ -67,13 +67,13 @@ class MiaApp:
 
 		Label(self.mioContenitore1, text="Intervallo: ").grid(row=2,pady=5,sticky=W)
 		v = StringVar()
-		v.set("80I15000026")
+		v.set("80I15002896")
 		self.e1 = Entry(self.mioContenitore1,textvariable=v)
 		v1 = StringVar()
-		v1.set("192.168.1.11")#192.168.1.146
+		v1.set("192.168.1.109")#192.168.1.146
 		self.e2 = Entry(self.mioContenitore1,textvariable=v1)
 		v2 = StringVar()
-		v2.set("8")
+		v2.set("3")
 		self.e3 = Entry(self.mioContenitore1,textvariable=v2)
 		self.e1.grid(row=0, column=1)
 		self.e2.grid(row=1, column=1)
@@ -291,7 +291,7 @@ class IlMioThread (threading.Thread):
 		self.send_post(dmsg,set_ip_apparato)
 
 	def loop_HW(self,user,password,second):
-		num = 0
+		num = 2
 		while not self.dead:
 			if num == 1 or num == 40:
 					self.create_send_new_data(self.set_ip_server)
