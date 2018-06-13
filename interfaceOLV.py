@@ -295,8 +295,9 @@ class IlMioThread (threading.Thread):
 		num = 1
 		while not self.dead:
 			if num == 1 or num == 40:
-					self.create_send_new_data(self.set_ip_server)
-					num = 2
+				self.create_send_new_data(self.set_ip_server)
+				num = 2
+			num = num+1
 			self.send_documentocommerciale(self.set_ip_server)
 			self.send_zfiscale(self.set_ip_server)
 			time.sleep(float(second))
