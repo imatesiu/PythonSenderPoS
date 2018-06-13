@@ -8,11 +8,11 @@ from base64 import b64encode
 from requests.auth import HTTPDigestAuth
 from requests.auth import HTTPBasicAuth
 import xml.etree.ElementTree
+import datetime
 from datetime import timedelta
 import xml.etree.ElementTree as ET
 import hashlib
 import re
-import datetime
 import json
 import csv
 import fileinput
@@ -58,7 +58,7 @@ class MiaApp:
 
 		self.mioGenitore = genitore
 		self.mioContenitore1 = Frame(genitore)
-		genitore.title("Python RCH Sender")
+		genitore.title("Python Olivetti Sender")
 		genitore.iconbitmap(r'favicon.ico')
 
 		Label(self.mioContenitore1, text="Matricola: ").grid(row=0,column=0,pady=5,sticky=W)
@@ -248,7 +248,8 @@ class IlMioThread (threading.Thread):
 		root = ET.fromstring(xml)
 		a = (root.findall(".//extraInfo"))
 		text = a[0].text
-		datet = datetime.strptime(text, '%d%m%Y%H%M%S')
+		print text
+		datet = datetime.datetime.strptime(text, '%d%m%Y%H%M%S')
 		return datet
 		#print res
 
@@ -291,7 +292,7 @@ class IlMioThread (threading.Thread):
 		self.send_post(dmsg,set_ip_apparato)
 
 	def loop_HW(self,user,password,second):
-		num = 2
+		num = 1
 		while not self.dead:
 			if num == 1 or num == 40:
 					self.create_send_new_data(self.set_ip_server)
