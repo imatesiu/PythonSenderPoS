@@ -36,7 +36,7 @@ print user
 set_ip_server = "spagnolo.isti.cnr.it"
 matricola = "88S25000037"
 
-
+prevToken = ""
 
 import urllib2, base64
 
@@ -52,6 +52,14 @@ def dateplus(date,ora):
 	datet = datetime.datetime.strptime(text, '%d%m%Y%H:%M:%S')
 	end_date = datet + datetime.timedelta(days=1)
 	return end_date.strftime('%d%m%Y')
+
+def daten():
+	datet = datetime.datetime.now()
+	return datet.strftime('%d%m%Y')
+
+def oren():
+	datet = datetime.datetime.now()
+	return datet.strftime('%H:%M:%S')
 
 
 def dateminus(date,ora):
@@ -369,7 +377,11 @@ def testFW():
 	kiusura = send_apertura_cassa()
 	#kiusura = 1
 	z = str(int(kiusura)+1)
-	tokenp = send_ric_token_cassa()
+	tokenp = []
+	if (len(prevToken)<2):
+		tokenp = send_ric_token_cassa()
+	else:
+		tokenp = [prevToken,daten(),oren()]
 	ved = readers(tokenp[0],tokenp[1],tokenp[2],z)
 	send_chiusura_cassa()
 	send_chiusura_server()
