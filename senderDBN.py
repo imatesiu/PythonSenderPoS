@@ -26,15 +26,15 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 interfaceType = "ServerRT"
 admin_user = "admin"
-admin_password = "RCH"
+admin_password = "admin"
 
-user = "AAAA0004"
+user = "AAAA0001"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "a"
 print user
-set_ip_server = "192.168.1.100"
-matricola = "88S25000036"
+set_ip_server = "spagnolo.isti.cnr.it"
+matricola = "88S25000037"
 
 
 
@@ -113,9 +113,20 @@ def send_delpuntocassa_server(puntocassa):
 	
 def send_stato_server():
 	url = interfaceType+"/ver1/api/richiesta/stato/server"
-	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
-	send_post(content, url, admin_user,admin_password)
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><RichiestaStatoServer/>"#"<Chiusura></Chiusura>"
+	send_post(content, url, user,password)
 
+def send_stato_cassa(puntocassa):
+	url = interfaceType+"/ver1/api/richiesta/stato/cassa"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><RichiestaStatoCassa><PuntoCassa>"+puntocassa+"</PuntoCassa></RichiestaStatoCassa>"#"<Chiusura></Chiusura>"
+	send_post(content, url, user,password)
+
+def send_stato_TabellaIva():
+	url = interfaceType+"/ver1/api/richiesta/iva"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><RichiestaTabellaIva/>"#"<Chiusura></Chiusura>"
+	send_post(content, url, user,password)
+
+	
 def send_stato_db():
 	url = interfaceType+"/ver1/api/richiesta/stato/db"
 	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
@@ -170,6 +181,7 @@ def send_documento(scontrino,cdcp,tk):
 	url = "ver1/api/invio/documento"
 	content = "<?xmlversion=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Documento><CCDCPrecedente>"+cdcp+"</CCDCPrecedente><PuntoCassa>"+user+"</PuntoCassa>"+scontrino+"<CCDC>"+tk+"</CCDC></Documento>"
 	#print content
+	#cc = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Documento><CCDCPrecedente>"+cdcp+"</CCDCPrecedente><PuntoCassa>"+user+"</PuntoCassa>"+scontrino+"<CCDC>"+tk+"</CCDC><Simulazione>1</Simulazione></Documento>"
 	cc = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Documento><CCDCPrecedente>"+cdcp+"</CCDCPrecedente><PuntoCassa>"+user+"</PuntoCassa>"+scontrino+"<CCDC>"+tk+"</CCDC></Documento>"
 	#res = "<?xmlversion=\"1.0\" encoding=\"UTF-8\"?><ConfermaDocumento><Data>29032018</Data><TotaleGiornaliero>12,20</TotaleGiornaliero><IdentificativoDocumento><NumeroAzzeramento>0001</NumeroAzzeramento><NumeroDocumento>0001</NumeroDocumento></IdentificativoDocumento></ConfermaDocumento>"
 	print cc
@@ -363,10 +375,12 @@ def testFW():
 	send_chiusura_server()
 	
 
-
+send_stato_server()
+#send_stato_TabellaIva()
+send_stato_cassa(user)
 #send_chiusura_cassa()
 #send_forza_chiusura_server()
-#exit(0)
+exit(0)
 #read_configurazione_serverURL()
 #send_chiusura_server()
 #send_configurazione_serverURL()	
