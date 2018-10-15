@@ -21,14 +21,16 @@ import time
 
 
 
-user = "00010001"
+user = "AAAA0001"
 if(len(sys.argv)>2):
 	 user = sys.argv[2]
-password = "admin"
-set_ip_server = "10.10.56.128"
+password = "a"
+set_ip_server = "192.168.1.100"
 #matricola = "96SRT000132"
-matricola = "53SNS310003"
+#matricola = "53SNS310003"
 
+
+matricola = "88S25000036"
 
 def hmacsha256(key,mess):
 	digest = hmac.new(bytes(key).encode('utf-8'), bytes(mess).encode('utf-8'), digestmod=hashlib.sha256).digest()

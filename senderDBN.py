@@ -23,15 +23,18 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
+
+interfaceType = "ServerRT"
 admin_user = "admin"
 admin_password = "RCH"
 
-user = "AB120001"
+user = "AAAA0004"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
-password = "aaa"
-set_ip_server = "192.168.1.10"
-matricola = "88S25000026"
+password = "a"
+print user
+set_ip_server = "192.168.1.100"
+matricola = "88S25000036"
 
 
 
@@ -109,12 +112,12 @@ def send_delpuntocassa_server(puntocassa):
 	send_post(content, url, admin_user,admin_password)
 	
 def send_stato_server():
-	url = "ServerRT/ver1/api/richiesta/stato/server"
+	url = interfaceType+"/ver1/api/richiesta/stato/server"
 	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
 	send_post(content, url, admin_user,admin_password)
 
 def send_stato_db():
-	url = "ServerRT/ver1/api/richiesta/stato/db"
+	url = interfaceType+"/ver1/api/richiesta/stato/db"
 	content = ""#"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
 	send_post(content, url, admin_user,admin_password)
 
@@ -125,22 +128,25 @@ def send_chiusura_cassa():
 	send_post(content,url,user,password)
 
 def send_chiusura_server():
-	url = "ServerRT/ver1/api/richiesta/chiusura"
+	url = interfaceType+"/ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ServerRT/></Chiusura>"
 	send_post(content,url,user,password)
 	
 def send_forza_chiusura_server():
-	url = "ServerRT/ver1/api/richiesta/chiusura"
+	url = interfaceType+"/ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ForzaChiusura/></Chiusura>"
 	send_post(content,url,user,password)
     
 def send_apertura_cassa():
-	url = "ServerRT/ver1/api/richiesta/apertura"
+	url = interfaceType+"/ver1/api/richiesta/apertura"
 	content = "<AperturaPuntoCassa/>"
+	#content = "<AperturaPuntoCassa><Ventilazione>0</Ventilazione></AperturaPuntoCassa>"
 	res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ConfermaAperturaPuntoCassa><UltimaChiusura>0000</UltimaChiusura></ConfermaAperturaPuntoCassa>"
 	response = send_post(content,url,user,password)
 	mydoc = minidom.parseString(response)
 	UltimaChiusura = mydoc.getElementsByTagName("UltimaChiusura")
+	if False:
+		return 0
 	return UltimaChiusura[0].firstChild.data
 
 def send_ric_token_cassa():
@@ -266,7 +272,9 @@ def readers(tok,data,ora,z):
 			resto = line[22]
 			tk = line[23]
 			assegno = line[24]
-			pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+tk+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>"+resto+"</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>"+assegno+"</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
+			#print pagementoCred, resto,tk, assegno
+			#exit(0)
+			pagare = "<Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>"+pagementoC+"</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>"+pagementoE+"</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>"+tk+"</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Non Riscosso</Descrizione><Importo>"+pagementoCred+"</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>"+resto+"</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>"+assegno+"</Importo><Tipo>AS</Tipo></Pagamento></Dettagli>"
 			totale = "<Totale>"+line[1]+"</Totale>"
 			#print doctype
 			if(doctype==1):
@@ -274,10 +282,10 @@ def readers(tok,data,ora,z):
 				newtk = creascontrino2(z,data,ora,tok,ved,ndoc)
 			else:
 				ved =  prev+prev2+totale+taxs
-				newtk = crea_rettifica(z,data,ora,tok,ved,ndoc,referenceClosurenumber,referenceDocnumber,doctype)
+				newtk = crea_rettifica(z,data,ora,tok,ved,ndoc,str(int(referenceClosurenumber)),str(int(referenceDocnumber)),doctype)
 			tok = newtk
 			ndoc+=1
-			data = dateminus(data,ora)
+			#data = dateminus(data,ora)
 		if(ndoc==12):
 			break
 
@@ -331,7 +339,7 @@ def creascontrino2(chiusura,data,ora,tkold,ved,ndoc):
 
 def loop_HW():
 	while True:
-		kiusura = send_apertura_cassa()
+		#kiusura = send_apertura_cassa()
 		z = str(int(kiusura)+1)
 		#print str(kiu)
 		#exit(0)
@@ -345,8 +353,9 @@ def loop_HW():
 	
 	
 def testFW():
-	send_chiusura_cassa()
+	#send_chiusura_cassa()
 	kiusura = send_apertura_cassa()
+	#kiusura = 1
 	z = str(int(kiusura)+1)
 	tokenp = send_ric_token_cassa()
 	ved = readers(tokenp[0],tokenp[1],tokenp[2],z)
@@ -354,14 +363,19 @@ def testFW():
 	send_chiusura_server()
 	
 
+
+#send_chiusura_cassa()
+#send_forza_chiusura_server()
+#exit(0)
 #read_configurazione_serverURL()
+#send_chiusura_server()
 #send_configurazione_serverURL()	
 #read_configurazione_serverURL()
 #exit(0)
 #send_forza_chiusura_server()
 #send_configurazione_serverURL()
-#testFW()
-loop_HW()
+testFW()
+#loop_HW()
 text = raw_input("prompt")  # Python 2
 
 #exit(0)	
