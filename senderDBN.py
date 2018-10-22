@@ -28,13 +28,13 @@ interfaceType = "ServerRT"
 admin_user = "admin"
 admin_password = "admin"
 
-user = "AAAA0001"
+user = "AAAA0003"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "a"
 print user
-set_ip_server = "spagnolo.isti.cnr.it"
-matricola = "88S25000037"
+set_ip_server = "spagnolo2.isti.cnr.it"
+matricola = "88S25000036"
 
 prevToken = ""
 
@@ -61,6 +61,10 @@ def oren():
 	datet = datetime.datetime.now()
 	return datet.strftime('%H:%M:%S')
 
+def datacnow():
+	datet = datetime.datetime.now()
+	end_date = datet - datetime.timedelta(seconds=60)
+	return end_date.strftime('%Y-%m-%d %H:%M:%S')
 
 def dateminus(date,ora):
 	text = str(date)+str(ora)
@@ -106,7 +110,7 @@ def send_newpuntocassa_server(puntocassa):
 
 def send_configurazione_serverURL():
 	url = "ver1/api/configurazione/rete"
-	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
 	send_post(content, url, admin_user,admin_password)
 
 def read_configurazione_serverURL():
@@ -143,7 +147,9 @@ def send_stato_db():
     
 def send_chiusura_cassa():
 	url = "ver1/api/richiesta/chiusura"
-	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura></Chiusura>"
+	date = datacnow()
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><DataOra>"+date+"</DataOra></Chiusura>"
+	print content
 	send_post(content,url,user,password)
 
 def send_chiusura_server():
@@ -159,7 +165,7 @@ def send_forza_chiusura_server():
 def send_apertura_cassa():
 	url = interfaceType+"/ver1/api/richiesta/apertura"
 	content = "<AperturaPuntoCassa/>"
-	#content = "<AperturaPuntoCassa><Ventilazione>0</Ventilazione></AperturaPuntoCassa>"
+	#content = "<AperturaPuntoCassa><Ventilazione>1</Ventilazione></AperturaPuntoCassa>"
 	res = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ConfermaAperturaPuntoCassa><UltimaChiusura>0000</UltimaChiusura></ConfermaAperturaPuntoCassa>"
 	response = send_post(content,url,user,password)
 	mydoc = minidom.parseString(response)
@@ -352,7 +358,7 @@ def creascontrino(chiusura,data,ora,tkold):
 
 def creascontrino2(chiusura,data,ora,tkold,ved,ndoc):
 	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento>"+ved+"</Scontrino>"
-	cont = tkold+matricola+user+scontrino
+	cont = tkold+matricola+user+scontrino #+"aa"
 	tk = createhash(cont)
 	send_documento(scontrino,tkold,tk.upper())
 	return tk.upper()
@@ -384,15 +390,18 @@ def testFW():
 		tokenp = [prevToken,daten(),oren()]
 	ved = readers(tokenp[0],tokenp[1],tokenp[2],z)
 	send_chiusura_cassa()
-	send_chiusura_server()
+	#send_chiusura_server()
 	
 
 send_stato_server()
 #send_stato_TabellaIva()
 send_stato_cassa(user)
+#read_configurazione_serverURL()
+#send_configurazione_serverURL()
+#read_configurazione_serverURL()
 #send_chiusura_cassa()
 #send_forza_chiusura_server()
-exit(0)
+#exit(0)
 #read_configurazione_serverURL()
 #send_chiusura_server()
 #send_configurazione_serverURL()	
