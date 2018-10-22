@@ -108,6 +108,12 @@ def send_newpuntocassa_server(puntocassa):
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ModificaMappa><TecnicoCF>AAABBB99C88D777E</TecnicoCF><LaboratorioPI>07123456789</LaboratorioPI><PuntoCassa>"+puntocassa+"</PuntoCassa><NuovoPuntoCassa/><Informazioni>Punto Cassa new</Informazioni></ModificaMappa>"
 	send_post(content, url, admin_user,admin_password)
 
+def send_hwinit():
+	url = "ver1/api/gestione/hwinit"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><AvviaHardwareInit><ResetTotale/></AvviaHardwareInit>"
+	send_post(content, url, admin_user,admin_password)
+
+
 def send_configurazione_serverURL():
 	url = "ver1/api/configurazione/rete"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
@@ -406,12 +412,13 @@ def testFW():
 send_stato_server()
 #send_stato_TabellaIva()
 send_stato_cassa(user)
+send_hwinit()
 #read_configurazione_serverURL()
 #send_configurazione_serverURL()
 #read_configurazione_serverURL()
 #send_chiusura_cassa()
 #send_forza_chiusura_server()
-#exit(0)
+exit(0)
 #read_configurazione_serverURL()
 #send_chiusura_server()
 #send_configurazione_serverURL()	

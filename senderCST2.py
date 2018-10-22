@@ -25,7 +25,7 @@ user = "AAAA0001"
 if(len(sys.argv)>2):
 	 user = sys.argv[2]
 password = "a"
-set_ip_server = "192.168.1.100"
+set_ip_server = "spagnolo2.isti.cnr.it"
 #matricola = "96SRT000132"
 #matricola = "53SNS310003"
 
@@ -33,7 +33,7 @@ set_ip_server = "192.168.1.100"
 matricola = "88S25000036"
 
 def hmacsha256(key,mess):
-	digest = hmac.new(bytes(key).encode('utf-8'), bytes(mess).encode('utf-8'), digestmod=hashlib.sha256).digest()
+	digest = hmac.new(bytes(key), bytes(mess), digestmod=hashlib.sha256).digest()
 	signature = base64.b64encode(digest)
 	return signature
 
@@ -75,16 +75,16 @@ def createhash(content):
 	sha256.update(content)
 	return base64.b64encode(sha256.digest())
 
-sendzdoc = "insertDeviceZDocument.php"
-senddoc = "insertFiscalDocument.php"
-getdailystatus = "getDailyStatus.php"
-opendaym = "getDailyOpen.php"
-sendZ = "insertZDocument.php"
+sendzdoc = "NcrServerRT/ver1/api/insertDeviceZDocument.php"
+senddoc = "NcrServerRT/ver1/api/insertFiscalDocument.php"
+getdailystatus = "NcrServerRT/ver1/api/getDailyStatus.php"
+opendaym = "NcrServerRT/ver1/api/getDailyOpen.php"
+sendZ = "NcrServerRT/ver1/api/insertZDocument.php"
 
 def send_post(content, url):
 	time.sleep(1)
 	#print content, url
-	response = requests.post('https://'+set_ip_server+'/'+url,data=content,auth=HTTPBasicAuth(user, password),headers={"Content-Type": "application/x-www-form-urlencoded","USER-AGENT":None,"ACCEPT":None ,"Content-Length": str(len(content))  }, verify=False)	
+	response = requests.post('https://'+set_ip_server+'/'+url,data=content,auth=HTTPBasicAuth(user, password),headers={"Content-Type": "application/json","USER-AGENT":None,"ACCEPT":None ,"Content-Length": str(len(content))  }, verify=False)	
 	#print response.text
 	assert response.status_code == 200
 	print "****RESPONSE****"
@@ -101,57 +101,11 @@ def read(filename):
 	return spamReader
 
 
-'''
-amount = 0
-znum = 10
-date =  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-close_ECR_command = {"data" : { "cashuuid" : user,"znum" : znum , "dtime" : date, "amount" : amount}}
-json_close_ECR = json.dumps(close_ECR_command)
-resp = send_post(json_close_ECR,sendZ)
 
-print json_close_ECR
-print resp
-exit(0)
-
-'''
-'''
-i = 0 
-while i<17:
-	close_fiscalbox = {"data" : { "type" : "0"}}
-	json_close_fiscalbox = json.dumps(close_fiscalbox)
-	respc = send_post(json_close_fiscalbox,sendzdoc)
-	print respc
-exit(0)	
-'''
-'''
-amount = 0
-znum = 0
-date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-amount = 0
-close_ECR_command = {"data" : { "cashuuid" : user,"znum" : znum , "dtime" : date, "amount" : amount}}
-json_close_ECR = json.dumps(close_ECR_command)
-resp = send_post(json_close_ECR,sendZ)
-print resp
-exit(0)
-
-
-ff = "{\"fiscalData\":\"{\"document\":{\"cashuuid\":\"0001ab01\",\"doctype\":\"1\",\"dtime\":\"2017-12-01 13:36:20\",\"docnumber\":\"1\",\"amount\":\"4500\",\"fiscalcode\":\"\",\"vatcode\":\"96SRT000017\",\"fiscaloperator\":\"Operatore 1\",\"businessname\":null,\"type_signature_id\":\"1\",\"prevSignature\":\"W7VHEXaXTzHVo5mqsAA845s9J6xK+K/TEYd6SLqf54M=\",\"errSignature\":null,\"grandTotal\":0,\"referenceClosurenumber\":-1,\"referenceDocnumber\":-1,\"referenceDtime\":null},\"items\":[{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 D\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"0\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"1\",\"department\":\"1\",\"vatcode\":\"N1\"},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 E\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"0\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"2\",\"department\":\"1\",\"vatcode\":\"N2\"},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 F\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"0\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"3\",\"department\":\"1\",\"vatcode\":\"N3\"},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 G\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"0\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"4\",\"department\":\"1\",\"vatcode\":\"N4\"},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 H\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"0\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"5\",\"department\":\"1\",\"vatcode\":\"N5\"},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 I\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"0\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"6\",\"department\":\"1\",\"vatcode\":\"N6\"},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 A\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"400\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"1\",\"department\":\"1\",\"vatcode\":null},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 B\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"1000\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"1\",\"department\":\"1\",\"vatcode\":null},{\"type\":\"1\",\"description\":\"VENDING MACHINE                     5,00 C\",\"amount\":\"500\",\"quantity\":\"1000\",\"unitprice\":\"500\",\"vatvalue\":\"2200\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"1\",\"department\":\"1\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"TOTALE  COMPLESSIVO               45,00\",\"amount\":\"4500\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"DI CUI IVA                1,54\",\"amount\":\"154\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"5\",\"description\":\"PAGAMENTO BANCOMAT\",\"amount\":\"45,00\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"2\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"IMPORTO PAGATO                45,00\",\"amount\":\"4500\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"29/11/2017 13:36         DOC.N.00003-00001\",\"amount\":\"4500\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null}],\"taxs\":[{\"gross\":\"500\",\"tax\":0,\"vatvalue\":0,\"vatcode\":\"N1\"},{\"gross\":\"500\",\"tax\":0,\"vatvalue\":0,\"vatcode\":\"N2\"},{\"gross\":\"500\",\"tax\":0,\"vatvalue\":0,\"vatcode\":\"N3\"},{\"gross\":500,\"tax\":0,\"vatvalue\":0,\"vatcode\":\"N4\"},{\"gross\":500,\"tax\":0,\"vatvalue\":0,\"vatcode\":\"N5\"},{\"gross\":500,\"tax\":0,\"vatvalue\":0,\"vatcode\":\"N6\"},{\"gross\":500,\"tax\":19,\"vatvalue\":400,\"vatcode\":\"\"},{\"gross\":500,\"tax\":45,\"vatvalue\":1000,\"vatcode\":\"\"},{\"gross\":500,\"tax\":90,\"vatvalue\":2200,\"vatcode\":\"\"}]}\",\"qrData\":{\"shaMetadata\":\"FBwe5ul7m79mOibct5PjlxdCujwSZpmwIwIxt2lYszI=\",\"addInfo\":\"96SRT000017;0001ab01;3;1\",\"signature\":\"niDCH4hi80QpT2q7xRHXadvK0o8LQfxPFQmGSZthQCo=\"}}"
-json_init =  json.loads(json.loads(json.dumps(ff)))
-#r = dict((k, str(v)) for k, v in json_init.iteritems())
-jsonfiscal =  json.dumps(json_init)
-jsonfiscal = "{\"fiscalData\":\"{\"document\":{\"cashuuid\":\"0001AB02\",\"doctype\":1,\"dtime\":\"2017-12-02 19:36:13\",\"docnumber\":1,\"amount\":100,\"fiscalcode\":\"\",\"vatcode\":\"IT02498250345\",\"fiscaloperator\":\"Operatore 1\",\"businessname\":null,\"type_signature_id\":\"1\",\"prevSignature\":null,\"errSignature\":null,\"grandTotal\":0,\"referenceClosurenumber\":0,\"referenceDocnumber\":0,\"referenceDtime\":null},\"items\":[{\"type\":\"1\",\"description\":\"PIZZA                               1,00 D\",\"amount\":\"100\",\"quantity\":\"1000\",\"unitprice\":\"100\",\"vatvalue\":\"1000\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"2\",\"department\":\"1\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"TOTALE  COMPLESSIVO                1,00\",\"amount\":\"100\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"DI CUI IVA                0,09\",\"amount\":\"9\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"5\",\"description\":\"CONTANTI\",\"amount\":\"100\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"1\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"IMPORTO PAGATO                 1,00\",\"amount\":\"9\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null},{\"type\":\"97\",\"description\":\"02/12/2017 19:36         DOC.N.00000-00001\",\"amount\":\"9\",\"quantity\":\"\",\"unitprice\":\"\",\"vatvalue\":\"\",\"fiscalvoid\":\"0\",\"signid\":\"1\",\"paymentid\":\"\",\"plu\":\"\",\"department\":\"\",\"vatcode\":null}],\"taxs\":[{\"gross\":100,\"tax\":9,\"vatvalue\":1000,\"vatcode\":\"\"}]}\",\"qrData\":{\"shaMetadata\":\"7MJDS6u8uiDMF6KVBvkhB5jQgcmDKkK0xMrYkJW0+nk=\",\"addInfo\":\"IMPORTO PAGATO 1,00\",\"signature\":\"AOZ9O/mH8ID/qw5XCMWITcElV2pNbv7+3OAls8QrBHU=\"}}"
-
-print (jsonfiscal)
-print "#########"
-re = send_post(jsonfiscal,senddoc)
-print re
-print "exit"
-
-exit(0)
-'''
 
 init = {"data" : { "cashuuid" : user}}
 json_init = json.dumps(init)
+print json_init
 response = send_post(json_init,getdailystatus)
 
 print json_init
@@ -540,6 +494,7 @@ for line in spamReader:
 		shaMetadata =  createhash(r["fiscalData"])
 		print  shaMetadata
 		addInfo = matricola+";"+user+";"+str(z)+";"+str(ndoc)
+		print addInfo
 		signaure =  hmacsha256(base64.b64decode(cashHmacKey),shaMetadata+addInfo)
 		qrdata =  createqrcode(shaMetadata,addInfo,signaure)
 		
