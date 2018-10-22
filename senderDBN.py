@@ -222,7 +222,7 @@ def crea_rettifica(chiusura,data,ora,tkold,ved,ndoc,referenceClosurenumber,refer
 
 
 def read(filename):
-	spamReader = list(csv.reader(open(filename,'U'), delimiter=';'))
+	spamReader = list(csv.reader(open(filename,'U'), delimiter='\t'))
 	header = spamReader[0]
 	del spamReader[0]
 	return spamReader
@@ -237,6 +237,15 @@ def readers(tok,data,ora,z):
 	ndoc = 1
 	print "#####"
 	for line in spamReader:
+		for kk in range(25):
+			e = line[kk]
+			if(not("E" in e or "N" in e or "R" in e or "A" in e)):
+				if not( ("DC" in e) or ("-"  in e)):
+					if not (( "." in e) or ("," in e)  ):
+						line[kk] = e+",00"
+					else:
+						if not (",00" in e):
+							line[kk] = e+"0"
 		importosenzasconto = line[0]
 		importoscontato = line[1]
 		imponibile = line[2]
@@ -312,7 +321,7 @@ def readers(tok,data,ora,z):
 			tok = newtk
 			ndoc+=1
 			#data = dateminus(data,ora)
-		if(ndoc==12):
+		if(ndoc==15):
 			break
 
 
@@ -351,28 +360,29 @@ def createTAX(importoscontato,imposta,aliquota,importoscontato2,imposta2,aliquot
 
 
 def creascontrino(chiusura,data,ora,tkold):
-	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo16</Descrizione><Importo>10,00</Importo><Quantita>1</Quantita><PrezzoUnitario>10,00</PrezzoUnitario><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>10,00</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>10,00</Totale><CorrispettiviIVA><Importo>10,00</Importo><BaseImponibile>9,09</BaseImponibile><Imposta>0,91</Imposta><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></CorrispettiviIVA></Scontrino>"
+	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>0001</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento><Dettagli><Vendita><Descrizione>Articolo16</Descrizione><Importo>10,00</Importo><Quantita>1</Quantita><PrezzoUnitario>10,00</PrezzoUnitario><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></Vendita></Dettagli><Dettagli><Pagamento><Descrizione>Contanti</Descrizione><Importo>10,00</Importo><Tipo>PC</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Elettronico</Descrizione><Importo>0,00</Importo><Tipo>PE</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Ticket</Descrizione><Importo>0,00</Importo><Tipo>TK</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>NonRiscosso</Descrizione><Importo>0,00</Importo><Tipo>NR</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Resto</Descrizione><Importo>0,00</Importo><Tipo>RS</Tipo></Pagamento></Dettagli><Dettagli><Pagamento><Descrizione>Assegno</Descrizione><Importo>0,00</Importo><Tipo>AS</Tipo></Pagamento></Dettagli><Totale>10,00</Totale><CorrispettiviIVA><Importo>10,00</Importo><BaseImponibile>9,09</BaseImponibile><Imposta>0,91</Imposta><CodiceIVA><Aliquota>10,00</Aliquota></CodiceIVA></CorrispettiviIVA></Scontrino>"+"<Simulazione>true</Simulazione>"
 	cont = tkold+matricola+user+scontrino
 	tk = createhash(cont)
 	send_documento(scontrino,tkold,tk.upper())
 
 def creascontrino2(chiusura,data,ora,tkold,ved,ndoc):
 	scontrino = "<Scontrino><Data>"+data+"</Data><Ora>"+ora+"</Ora><NumeroDocumento>"+str(ndoc).zfill(4)+"</NumeroDocumento><NumeroAzzeramento>"+str(chiusura).zfill(4)+"</NumeroAzzeramento>"+ved+"</Scontrino>"
-	cont = tkold+matricola+user+scontrino #+"aa"
+	cont = tkold+matricola+user+scontrino
 	tk = createhash(cont)
 	send_documento(scontrino,tkold,tk.upper())
 	return tk.upper()
 
 def loop_HW():
 	while True:
-		#kiusura = send_apertura_cassa()
+		kiusura = send_apertura_cassa()
 		z = str(int(kiusura)+1)
 		#print str(kiu)
 		#exit(0)
 		tokenp = send_ric_token_cassa()
 		creascontrino(z,tokenp[1],tokenp[2],tokenp[0])
 		send_chiusura_cassa()	
-		send_chiusura_server()	
+		#send_chiusura_server()	
+		exit(0)
 		time.sleep(19)
 	
 
