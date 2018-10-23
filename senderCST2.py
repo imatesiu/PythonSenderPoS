@@ -43,6 +43,11 @@ def hmacsha256(key,mess):
 def hmactoccdc(signature):
 	ccdc  = binascii.hexlify(base64.b64decode(bytes(signature).encode('utf-8')))
 	return ccdc.upper()
+	
+def daten():
+	datet = datetime.now()
+	return datet.strftime('%Y-%m-%d %H:%M')
+	
 
 class JSONObject:
     def __init__(self, d):
@@ -196,6 +201,7 @@ def createelement(importosenzasconto,importoscontato,imponibile,imposta,aliquota
 	description = "VENDITA"
 	amount = 0
 	vatvalue = 0
+	exemptioncode = ""
 	if(tipodocumento=="TOTALE"):
 		type = "97"
 		description = "TOTALE  COMPLESSIVO"
@@ -203,6 +209,8 @@ def createelement(importosenzasconto,importoscontato,imponibile,imposta,aliquota
 	else:
 		if "N" not in aliquota:
 			vatvalue = int(float(aliquota.replace(",","."))*100)
+		else:
+			exemptioncode = aliquota
 	print float(str(importoscontato).replace(",","."))	
 	amount = int(float(str(importoscontato).replace(",","."))*100)
 	print importoscontato
@@ -220,7 +228,7 @@ def createelement(importosenzasconto,importoscontato,imponibile,imposta,aliquota
 	            "paymentid":"",
 	            "plu":"1",
 	            "department":"1",
-				"exemptioncode":"",
+				"exemptioncode":str(exemptioncode),
 				"vatpercentage":str(vatvalue)
 	            #"vatcode":str(aliquota)
 	         }
@@ -412,6 +420,9 @@ def createTAX(imponibile,imposta,aliquota,imponibile2,imposta2,aliquota2):
       #imposta,aliquota,imposta2,aliquota2
 	
 def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagamentoC,pagamentoE,pagamentoCC,taxs,referenceClosurenumber,referenceDocnumber,doctype,z):
+	dat = ""
+	if(referenceDocnumber>0):
+		dat = daten()
 	fiscal = {  
   	 "fiscalData":{  
       "document":{  
@@ -431,7 +442,7 @@ def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagam
          "grandTotal":amount,
          "referenceClosurenumber":str(referenceClosurenumber),
          "referenceDocnumber":str(referenceDocnumber),
-         "referenceDtime":""
+         "referenceDtime":str(dat)
       },
       "items":[  
           
@@ -562,10 +573,10 @@ for line in spamReader:
 		if(int(resp_code)==1100):
 			print "resp_code"+str(resp_code)
 			break
-		if(ndoc>=2):
+		if(ndoc>=12):
 			break
 		#exit(0)
-close = 0
+close = 1
 if(len(sys.argv)>3):
 	 close = sys.argv[3]
 
