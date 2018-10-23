@@ -17,6 +17,7 @@ import fileinput
 import hmac
 import hashlib
 import base64
+import binascii
 import time
 reload(sys)  
 sys.setdefaultencoding('Cp1252')
@@ -38,6 +39,10 @@ def hmacsha256(key,mess):
 	digest = hmac.new(bytes(k).encode('utf-8'), bytes(mess).encode('utf-8'), digestmod=hashlib.sha256).digest()
 	signature = base64.b64encode(digest)
 	return signature
+	
+def hmactoccdc(signature):
+	ccdc  = binascii.hexlify(base64.b64decode(bytes(signature).encode('utf-8')))
+	return ccdc.upper()
 
 class JSONObject:
     def __init__(self, d):
@@ -541,6 +546,10 @@ for line in spamReader:
 		#r = dict((k, str(v)) for k, v in fiscal.iteritems())
 		jsonfiscal =  json.dumps(r)
 		print jsonfiscal
+		print hmactoccdc(signaure)
+		print "#########################"
+		print "#########################"
+		print "#########################"
 		#parse(jsonfiscal)
 		re = send_post(jsonfiscal,senddoc)
 		json_reponse = json.loads(re)
