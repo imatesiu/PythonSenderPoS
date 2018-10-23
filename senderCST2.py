@@ -108,7 +108,7 @@ json_init = json.dumps(init)
 print json_init
 response = send_post(json_init,getdailystatus)
 
-print json_init
+#print json_init
 
 '''
 response  = { 
@@ -131,10 +131,10 @@ response  = {
 data = json.loads(response)
 print data
 #print type(data)
-cashToken =  data["cashToken"]
+'''cashToken =  data["cashToken"]
 cashHmacKey =  data["cashHmacKey"]
 numberClosure =  data["numberClosure"]
-cashLastDocNumber = data['cashLastDocNumber']
+cashLastDocNumber = data['cashLastDocNumber']'''
 
 #exit(0)
 print "##########"
@@ -143,7 +143,7 @@ openday = {"data" : { "cashuuid" : user, "dtime" : date}}
 print openday
 json_openday = json.dumps(openday)
 resp = send_post(json_openday,opendaym)#opendaym
-print resp
+#print resp
 '''
 resp  = { 
   "numberClosure": 13,
@@ -164,6 +164,10 @@ resp  = {
 
 #json_response = json.dumps(resp)
 data = json.loads(resp)
+cashToken =  data["cashToken"]
+cashHmacKey =  data["cashHmacKey"]
+numberClosure =  data["numberClosure"]
+cashLastDocNumber = data['cashLastDocNumber']
 if(data['cashToken']!=None):
 	cashToken =  data['cashToken']
 if(data['cashHmacKey']!=None):	
@@ -199,8 +203,9 @@ def createelement(importosenzasconto,importoscontato,imponibile,imposta,aliquota
 	element = {
 	            "type":type,
 	            "description":""+description+"                     "+importoscontato+" D",
-	            "amount": amount,
-	            "quantity":"1",
+	            "netamount": amount,
+				"grossamount": amount,
+	            "quantity":"1000",
 	            "unitprice":str(importoscontato),
 	            "vatvalue":vatvalue,
 	            "fiscalvoid":"0",
@@ -208,7 +213,9 @@ def createelement(importosenzasconto,importoscontato,imponibile,imposta,aliquota
 	            "paymentid":"",
 	            "plu":"1",
 	            "department":"1",
-	            "vatcode":str(aliquota)
+				"exemptioncode":"",
+				"vatpercentage":str(vatvalue)
+	            #"vatcode":str(aliquota)
 	         }
 	return element
 
@@ -216,7 +223,8 @@ def createiva(imposta):
 	iva =      {  
 	            "type":"97",
 	            "description":"DI CUI IVA                "+imposta+"",
-	            "amount":imposta,
+	            "netamount":imposta,
+				"grossamount":"0",
 	            "quantity":"",
 	            "unitprice":"",
 	            "vatvalue":"",
@@ -225,7 +233,8 @@ def createiva(imposta):
 	            "paymentid":"",
 	            "plu":"",
 	            "department":"",
-	            "vatcode":""
+				"exemptioncode":"",
+	            "vatpercentage":""
 	         }
 	return iva
 	
@@ -233,16 +242,18 @@ def createPagContanti(importo):
 	pagamento   =   {  
 	            "type":"5",
 	            "description":"PAGAMENTO CONTANTI "+importo,
-	            "amount":importo,
-	            "quantity":"",
-	            "unitprice":"",
+	            "netamount":int(float(importo.replace(",","."))*100),
+				"grossamount": "0",# int(float(importo.replace(",","."))*100),
+	            "quantity":"1000",
+	            "unitprice":"0",
 	            "vatvalue":"",
-	            "fiscalvoid":"0",
-	            "signid":"1",
+	            "fiscalvoid":"",
+	            "signid":"",
 	            "paymentid":"1",
 	            "plu":"",
 	            "department":"",
-	            "vatcode":""
+	            "exemptioncode":"",
+	            "vatpercentage":"0"
 	         }
 	return pagamento
 
@@ -250,16 +261,18 @@ def createPagElettronico(importo):
 	pagamento   =   {  
 	            "type":"5",
 	            "description":"PAGAMENTO BANCOMAT "+importo,
-	            "amount":str(importo),
-	            "quantity":"",
-	            "unitprice":"",
+	           "netamount":int(float(importo.replace(",","."))*100),
+				"grossamount": "0",#int(float(importo.replace(",","."))*100),
+	            "quantity":"1000",
+	            "unitprice":"0",
 	            "vatvalue":"",
-	            "fiscalvoid":"0",
-	            "signid":"1",
+	            "fiscalvoid":"",
+	            "signid":"",
 	            "paymentid":"2",
 	            "plu":"",
 	            "department":"",
-	            "vatcode":""
+	            "exemptioncode":"",
+	            "vatpercentage":"0"
 	         }
 	return pagamento
 	
@@ -272,16 +285,35 @@ def createPagCredito(importo):
 	pagamento   =   {  
 	            "type":"5",
 	            "description":"PAGAMENTO CREDITO "+importo,
-	            "amount":importo,
-	            "quantity":"",
-	            "unitprice":"",
-	            "vatvalue":"",
-	            "fiscalvoid":"0",
-	            "signid":"1",
+	            "netamount":int(float(importo.replace(",","."))*100),
+				"grossamount": "0",#int(float(importo.replace(",","."))*100),
+	            "quantity":"1000",
+	            "unitprice":"0",
+	            "fiscalvoid":"",
+	            "signid":"",
 	            "paymentid":"3",
 	            "plu":"",
 	            "department":"",
-	            "vatcode":""
+	            "exemptioncode":"",
+	            "vatpercentage":"0"
+	         }
+	return pagamento
+	
+def createresto(importo):
+	pagamento   =   {  
+	            "type":"97",
+	            "description":"PAGAMENTO RESTO "+importo,
+	            "netamount":"0",#int(float(importo.replace(",","."))*100),
+				"grossamount": "0",#int(float(importo.replace(",","."))*100),
+	            "quantity":"1000",
+	            "unitprice":"0",
+	            "fiscalvoid":"",
+	            "signid":"",
+	            "paymentid":"0",
+	            "plu":"",
+	            "department":"",
+	            "exemptioncode":"",
+	            "vatpercentage":"0"
 	         }
 	return pagamento
 	
@@ -290,66 +322,66 @@ def createTAX(imponibile,imposta,aliquota,imponibile2,imposta2,aliquota2):
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":0,
-            "vatcode":"N1"
+            "vatpercentage":0,
+            "exemptioncode":"N1"
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":0,
-            "vatcode":"N2"
+            "vatpercentage":0,
+            "exemptioncode":"N2"
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":0,
-            "vatcode":"N3"
+            "vatpercentage":0,
+            "exemptioncode":"N3"
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":0,
-            "vatcode":"N4"
+            "vatpercentage":0,
+            "exemptioncode":"N4"
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":0,
-            "vatcode":"N5"
+            "vatpercentage":0,
+            "exemptioncode":"N5"
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":0,
-            "vatcode":"N6"
+            "vatpercentage":0,
+            "exemptioncode":"N6"
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":400,
-            "vatcode":""
+            "vatpercentage":400,
+            "exemptioncode":""
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":1000,
-            "vatcode":""
+            "vatpercentage":1000,
+            "exemptioncode":""
          },
          {  
             "gross":0,
             "tax":0,
-            "vatvalue":2200,
-            "vatcode":""
+            "vatpercentage":2200,
+            "exemptioncode":""
          }
       ]
 	for tax in taxs:
-		if(tax['vatcode'] == aliquota):
+		if(tax['exemptioncode'] == aliquota):
 			tax['gross'] = int(float(imponibile.replace(",","."))*100)
-		if(tax['vatcode'] == aliquota2):
+		if(tax['exemptioncode'] == aliquota2):
 			tax['gross'] = int(float(imponibile2.replace(",","."))*100)
 		'''else:'''
 		if ("N" not in aliquota):
-			if(tax['vatvalue'] == int(aliquota)*100):
+			if(tax['vatpercentage'] == int(aliquota)*100):
 				tax['tax'] = int(float(imposta.replace(",","."))*100)
 				tax["gross"] = int(float(imponibile.replace(",","."))*100)
 			
@@ -357,7 +389,7 @@ def createTAX(imponibile,imposta,aliquota,imponibile2,imposta2,aliquota2):
 			tax['tax'] = imposta2
 		else:'''
 		if ("N" not in aliquota2):
-			if(tax['vatvalue'] == int(aliquota2)*100):
+			if(tax['vatpercentage'] == int(aliquota2)*100):
 				tax['tax'] = int(float(imposta2.replace(",","."))*100)
 				tax["gross"] = int(float(imponibile2.replace(",","."))*100)
 	res = []
@@ -381,7 +413,7 @@ def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagam
          "dtime":str(date),
          "docnumber":str(ndoc),
          "docznumber":str(z),
-         "amount":importosenzasconto,
+         "trxtotal":importosenzasconto,
          "fiscalcode":matricola,
          "vatcode": matricola,
          "fiscaloperator":"Operatore 1",
@@ -397,11 +429,12 @@ def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagam
       "items":[  
           
             element,element2
-         ,totale,iva,pagamentoC,pagamentoE,pagamentoCC,
+         ,totale,iva,pagamentoC,pagamentoE,pagamentoCC,createresto("0"),
          {  
             "type":"97",
             "description":""+date+"         DOC.N."+str(z).zfill(5)+"-"+str(ndoc).zfill(5)+"",
-            "amount":importosenzasconto,
+            "netamount":importosenzasconto,
+			"grossamount":importosenzasconto,
             "quantity":"",
             "unitprice":"",
             "vatvalue":"",
@@ -410,10 +443,11 @@ def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagam
             "paymentid":"",
             "plu":"",
             "department":"",
-            "vatcode":""
+            "vatpercentage":"",
+			"exemptioncode":""
          }
       ],
-      "taxs":  
+      "taxes":  
          taxs
       
  	  }
@@ -514,7 +548,7 @@ for line in spamReader:
 		if(int(resp_code)==1100):
 			print "resp_code"+str(resp_code)
 			break
-		if(ndoc>=11):
+		if(ndoc>=2):
 			break
 		#exit(0)
 close = 0
@@ -523,9 +557,10 @@ if(len(sys.argv)>3):
 
 if (close==0):
 	close_ECR_command = {"data" : { "cashuuid" : user,"znum" : z , "dtime" : date, "amount" : amount}}
+	print close_ECR_command
 	json_close_ECR = json.dumps(close_ECR_command)
 	resp = send_post(json_close_ECR,sendZ)
-	print resp
+
 
 exit(0)
 
