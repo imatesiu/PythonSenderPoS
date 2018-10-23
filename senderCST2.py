@@ -18,7 +18,8 @@ import hmac
 import hashlib
 import base64
 import time
-
+reload(sys)  
+sys.setdefaultencoding('Cp1252')
 
 
 user = "AAAA0001"
@@ -27,13 +28,14 @@ if(len(sys.argv)>2):
 password = "a"
 set_ip_server = "spagnolo2.isti.cnr.it"
 #matricola = "96SRT000132"
-#matricola = "53SNS310003"
+#matricola = "53SNS310003".encode('utf-8')base64.b64decode(
 
 
 matricola = "88S25000036"
 
 def hmacsha256(key,mess):
-	digest = hmac.new(bytes(key), bytes(mess), digestmod=hashlib.sha256).digest()
+	k = base64.b64decode(key)
+	digest = hmac.new(bytes(k).encode('utf-8'), bytes(mess).encode('utf-8'), digestmod=hashlib.sha256).digest()
 	signature = base64.b64encode(digest)
 	return signature
 
@@ -72,7 +74,7 @@ def loopElement(spamReader):
 
 def createhash(content):
 	sha256 = hashlib.sha256()
-	sha256.update(content)
+	sha256.update(bytes(content).encode('utf-8'))
 	return base64.b64encode(sha256.digest())
 
 sendzdoc = "NcrServerRT/ver1/api/insertDeviceZDocument.php"
@@ -453,6 +455,7 @@ def createfiscaldata(amount,importosenzasconto,element,element2,totale,iva,pagam
  	  }
 	}
 	return fiscal
+	
 
 def parse(text):
     try:
@@ -525,14 +528,16 @@ for line in spamReader:
 
 		r = dict((k, str(v).replace("'","\"")) for k, v in fiscal.iteritems())
 		#print "++"+json.dumps(r["fiscalData"])
+		#print json.dumps(r["fiscalData"])
 		shaMetadata =  createhash(r["fiscalData"])
 		print  shaMetadata
 		addInfo = matricola+";"+user+";"+str(z)+";"+str(ndoc)
 		print addInfo
-		signaure =  hmacsha256(base64.b64decode(cashHmacKey),shaMetadata+addInfo)
-		qrdata =  createqrcode(shaMetadata,addInfo,signaure)
-		
+		signaure =  hmacsha256(cashHmacKey,shaMetadata)
+		qrdata =  createqrcode(shaMetadata,"",signaure)
+		#r2 = {}
 		r['qrData'] = qrdata
+		#r2['fiscalData'] = fiscal
 		#r = dict((k, str(v)) for k, v in fiscal.iteritems())
 		jsonfiscal =  json.dumps(r)
 		print jsonfiscal
