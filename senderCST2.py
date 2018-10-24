@@ -576,7 +576,7 @@ for line in spamReader:
 		if(ndoc>=12):
 			break
 		#exit(0)
-close = 1
+close = 0
 if(len(sys.argv)>3):
 	 close = sys.argv[3]
 
