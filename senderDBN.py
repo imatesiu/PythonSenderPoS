@@ -28,13 +28,13 @@ interfaceType = "ServerRT"
 admin_user = "admin"
 admin_password = "admin"
 
-user = "AAAA0003"
+user = "AAAA0002"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
 password = "a"
 print user
-set_ip_server = "spagnolo2.isti.cnr.it"
-matricola = "88S25000036"
+set_ip_server = "192.168.1.102"
+matricola = "88S25000044"
 
 prevToken = ""
 
@@ -52,6 +52,12 @@ def dateplus(date,ora):
 	datet = datetime.datetime.strptime(text, '%d%m%Y%H:%M:%S')
 	end_date = datet + datetime.timedelta(days=1)
 	return end_date.strftime('%d%m%Y')
+
+def dateminho(date,ora):
+	text = str(date)+str(ora)
+	datet = datetime.datetime.strptime(text, '%d%m%Y%H:%M:%S')
+	end_date = datet + datetime.timedelta(hours=1)
+	return end_date.strftime('%Y-%m-%d %H:%M:%S')
 
 def daten():
 	datet = datetime.datetime.now()
@@ -71,6 +77,12 @@ def dateminus(date,ora):
 	datet = datetime.datetime.strptime(text, '%d%m%Y%H:%M:%S')
 	end_date = datet - datetime.timedelta(days=1)
 	return end_date.strftime('%d%m%Y')
+
+def read_mem_serverC():
+	url = "ver1/api/richiesta/dump_memoria?Type=C"
+	content = ""
+	send_get(content, url, admin_user,admin_password)
+
 
 def send_post(content, url, usr,passw):
 	print "https://"+set_ip_server+"/"+url
@@ -158,6 +170,12 @@ def send_chiusura_cassa():
 	print content
 	send_post(content,url,user,password)
 
+def send_chiusura_cassa(date,ore):
+	url = "ver1/api/richiesta/chiusura"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><DataOra>"+dateminho(date,ore)+"</DataOra></Chiusura>"
+	print content
+	send_post(content,url,user,password)
+
 def send_chiusura_server():
 	url = interfaceType+"/ver1/api/richiesta/chiusura"
 	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Chiusura><ServerRT/></Chiusura>"
@@ -236,7 +254,7 @@ def crea_rettifica(chiusura,data,ora,tkold,ved,ndoc,referenceClosurenumber,refer
 
 
 def read(filename):
-	spamReader = list(csv.reader(open(filename,'U'), delimiter=';'))
+	spamReader = list(csv.reader(open(filename,'U'), delimiter='\t'))
 	header = spamReader[0]
 	del spamReader[0]
 	return spamReader
@@ -413,13 +431,17 @@ def testFW():
 	else:
 		tokenp = [prevToken,daten(),oren()]
 	ved = readers(tokenp[0],tokenp[1],tokenp[2],z)
-	send_chiusura_cassa()
-	#send_chiusura_server()
+	send_chiusura_cassa(tokenp[1],tokenp[2])
+	send_chiusura_server()
 	
 
+#send_chiusura_server()
+#read_mem_serverC()
+#exit(0)
 send_stato_server()
 #send_stato_TabellaIva()
 send_stato_cassa(user)
+#send_chiusura_cassa()
 #send_hwinit()
 #read_configurazione_serverURL()
 #send_configurazione_serverURL()
