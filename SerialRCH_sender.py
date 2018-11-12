@@ -19,46 +19,39 @@ import base64
 import time
 from xml.dom import minidom
 
-#from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-#requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-import serial
+def read(filename):
+	spamReader = list(csv.reader(open(filename,'U'), delimiter=';'))
+	header = spamReader[0]
+	header2 = spamReader[1]
+	del spamReader[0]
+	del spamReader[0]
+	return spamReader
+	
+def readers():
+	spamReader = read(sys.argv[1])
+	nline = 0
+	prev = {}
+	prev2 = {}
+	taxs = []
+	amount = 0
+	ndoc = 1
+	print "#####"
+	for line in spamReader:
+		print line
+		tipo = line[7]
+		if tipo == "DC":
+			importosenzasconto = line[0]
+			importoscontato = line[1]
+			imponibile = line[2]
+			imposta = line[3]
+			aliquota = line[4]
+			percentualesconto = line[5]
+			valoresconto = line[6]
+			tipodocumento = line[7]
+			exit(0)
+readers()
 
-# configure the serial connections (the parameters differs on the device you are connecting to)
-ser = serial.Serial(
-    port='/dev/cu.usbmodem621',
-    baudrate=57600,
-    parity=serial.PARITY_NONE,
-    stopbits=serial.STOPBITS_ONE,
-    bytesize=serial.EIGHTBITS, timeout=1
-)
 
-#ser = serial.Serial('/dev/cu.usbmodem621',9600, timeout=1)
-print "S1"
-ser.isOpen()
-print "S2"
-
-while True:
-    cmd = raw_input("Enter command or 'exit':")
-        # for Python 2
-    #cmd = input("Enter command or 'exit':")
-        # for Python 3
-    if cmd == 'exit':
-        ser.close()
-        exit()
-    else:
-    	print cmd
-        ser.write(cmd.encode('HEX'))
-        out = ser.read()
-        print('Receiving...'+out)
-
-ser.write('K') 
-ser.write('C1 =R1/$200/(Reparto 01) =S')
-ser.write('T1')
-print "S3"
-
-#line = ser.readline()
-
-#print line
-ser.close()  
+	
