@@ -28,7 +28,27 @@ def read(filename):
 	del spamReader[0]
 	del spamReader[0]
 	return spamReader
-	
+
+def aliquotareparto(aliquota):
+	if("04" in aliquota):
+		return 1
+	if("10" in aliquota):
+		return 2
+	if("22" in aliquota):
+		return 3
+	if("EE" in aliquota):
+		return 4
+	if("ES" in aliquota):
+		return 5
+	if("AL" in aliquota):
+		return 6
+	if("RM" in aliquota):
+		return 7
+	if("NS" in aliquota):
+		return 8
+	if("NI" in aliquota):
+		return 9
+
 def df(line,pimp):
 	importosenzasconto = line[0]
 	importoscontato = line[1]
@@ -41,7 +61,7 @@ def df(line,pimp):
 	tipodocumento = line[7]
 	importosc = float(importosenzasconto.replace(",","."))
 	if(importosc>0):
-		print "=R1/$"+str(importosc).replace(".","")
+		print("=R%s/$%s" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
 		if len(percentualesconto)>1:
 			psconto = float(percentualesconto.replace(",","."))
 			print "=%/*"+str(psconto)
@@ -95,7 +115,7 @@ def readers():
 			tipodocumento = line[7]
 			importosc = float(importosenzasconto.replace(",","."))
 			if(importosc>0):
-				print "=R1/$"+str(importosc).replace(".","")
+				print("=R%s/$%s" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
 				if len(percentualesconto)>1:
 					psconto = float(percentualesconto.replace(",","."))
 					print "=%/*"+str(psconto)
