@@ -19,7 +19,11 @@ import base64
 import time
 from xml.dom import minidom
 
+'''import serial
 
+def serial(p):
+	serial = serial.Serial(port = p, baudrate = 9600, parity = serial.None, stopbits = serial.STOPBITS_ONE, bytesize = serial.EIGHTBITS,  xonxoff=True, timeout=2)
+'''
 
 def read(filename):
 	spamReader = list(csv.reader(open(filename,'U'), delimiter=';'))
