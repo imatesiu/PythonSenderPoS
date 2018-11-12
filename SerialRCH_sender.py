@@ -29,18 +29,61 @@ def read(filename):
 	del spamReader[0]
 	return spamReader
 	
+def df(line,pimp):
+	importosenzasconto = line[0]
+	importoscontato = line[1]
+	imponibile = line[2]
+	imposta = line[3]
+	aliquota = line[4]
+	percentualesconto = line[5]
+	vsconto = line[6]
+	valoresconto = line[8]
+	tipodocumento = line[7]
+	importosc = float(importosenzasconto.replace(",","."))
+	if(importosc>0):
+		print "=R1/$"+str(importosc).replace(".","")
+		if len(percentualesconto)>1:
+			psconto = float(percentualesconto.replace(",","."))
+			print "=%/*"+str(psconto)
+		else:
+			if len(valoresconto)>1 and len(vsconto)>1:
+				print "=S"
+				vsconto = float(valoresconto.replace(",","."))
+				print "=V/$"+str(vsconto).replace(".","")
+	else:
+		if(pimp>0):
+			print "=a"
+		else:
+			print "=K"
+	
 def readers():
 	spamReader = read(sys.argv[1])
 	nline = 0
 	prev = {}
 	prev2 = {}
 	taxs = []
-	amount = 0
+	rifn = ""
 	ndoc = 0
+	pimp = 0
+	ddc = ""
 	print "#####"
 	for line in spamReader:
 		#print line
 		tipo = line[7]
+		if tipo == "ADC":
+			if ddc == "ADC":
+				data = line[8]
+				#df(line,pimp)
+				#print rifn+";"+data
+			else:
+				rifn = line[8]
+				#df(line,pimp)
+		if tipo == "RDC":
+			if ddc == "RDC":
+				data = line[8]
+				#print rifn+";"+data
+			else:
+				rifn = line[8]
 		if tipo == "DC":
 			importosenzasconto = line[0]
 			importoscontato = line[1]
@@ -48,16 +91,26 @@ def readers():
 			imposta = line[3]
 			aliquota = line[4]
 			percentualesconto = line[5]
-			valoresconto = line[6]
+			valoresconto = line[8]
 			tipodocumento = line[7]
-			print "=R1/$"+str(float(importosenzasconto.replace(",","."))).replace(".","")
-			if len(percentualesconto)>1:
-				psconto = float(percentualesconto.replace(",","."))
-				print "=%/*"+str(psconto)
+			importosc = float(importosenzasconto.replace(",","."))
+			if(importosc>0):
+				print "=R1/$"+str(importosc).replace(".","")
+				if len(percentualesconto)>1:
+					psconto = float(percentualesconto.replace(",","."))
+					print "=%/*"+str(psconto)
+				else:
+					if len(valoresconto)>1:
+						print "=S"
+						vsconto = float(valoresconto.replace(",","."))
+						print "=V/$"+str(vsconto).replace(".","")
 			else:
-				if len(valoresconto)>1:
-					vsconto = float(valoresconto.replace(",","."))
-					print "=V/$"+str(vsconto).replace(".","")
+				if(pimp>0):
+					print "=a"
+				else:
+					print "=K"
+			
+			pimp = importosc
 		if tipo == "P":
 			ticket = line[0]
 			bancomat = line[1]
@@ -83,8 +136,10 @@ def readers():
 			if len(Contanti)>0:
 				itk = float(Contanti.replace(",","."))
 				print "=T${0:.0f}".format(itk*100)
-			print "=C"
 			ndoc+=1
+			print "=C"
+			print
+		ddc = tipo
 		if ndoc == 15:
 			exit(0)
 			#exit(0)Ticket;Bancomat;Credito;Assegni;CartaC;Contanti
