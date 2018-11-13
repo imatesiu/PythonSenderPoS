@@ -20,6 +20,10 @@ import time
 from xml.dom import minidom
 
 
+def datem(date):
+	text = str(date)
+	datet = datetime.datetime.strptime(text, '%d/%m/%Y')
+	return datet.strftime('%d%m%y')
 
 def read(filename):
 	spamReader = list(csv.reader(open(filename,'U'), delimiter=';'))
@@ -97,7 +101,7 @@ def readers():
 				data = line[8]
 				#df(line,pimp)
 				split = rifn.split("_")
-				print("=k/&%s/[/%s/]%s" % (data.replace("/","") , split[1], split[0] ))
+				print("=k/&%s/[/%s/]%s" % (datem(data) , split[1], split[0] ))
 				print 
 			else:
 				rifn = line[8]
@@ -106,7 +110,7 @@ def readers():
 			if ddc == "RDC":
 				data = line[8]
 				split = rifn.split("_")
-				print("=r/&%s/[/%s/]%s" % (data.replace("/","") , split[1], split[0] ))
+				print("=r/&%s/[/%s/]%s" % (datem(data) , split[1], split[0] ))
 				print prev
 				print df(line,pimp)
 				print "=T"
