@@ -113,7 +113,7 @@ def readers():
 			percentualesconto = line[5]
 			valoresconto = line[8]
 			tipodocumento = line[7]
-			importosc = float(importosenzasconto.replace(",","."))
+			importosc = float(importosenzasconto.replace(",","."))*10
 			if(importosc>0):
 				print("=R%s/$%s" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
 				if len(percentualesconto)>1:
@@ -122,7 +122,7 @@ def readers():
 				else:
 					if len(valoresconto)>1:
 						print "=S"
-						vsconto = float(valoresconto.replace(",","."))
+						vsconto = float(valoresconto.replace(",",".")*10)
 						print "=V/$"+str(vsconto).replace(".","")
 			else:
 				if(pimp>0):
@@ -140,22 +140,22 @@ def readers():
 			Contanti = line[5]
 			if len(ticket)>0:
 				itk = float(ticket.replace(",","."))
-				print "=T1${0:.0f}".format(itk*100)
+				print "=T5/${0:.0f}".format(itk*100)
 			if len(bancomat)>0:
 				itk = float(bancomat.replace(",","."))
-				print "=T2${0:.0f}".format(itk*100)
+				print "=T4/${0:.0f}".format(itk*100)
 			if len(Credito)>0:
 				itk = float(Credito.replace(",","."))
-				print "=T3${0:.0f}".format(itk*100)
+				print "=T2/${0:.0f}".format(itk*100)
 			if len(Assegni)>0:
 				itk = float(Assegni.replace(",","."))
-				print "=T4${0:.0f}".format(itk*100)
+				print "=T3/${0:.0f}".format(itk*100)
 			if len(CartaC)>0:
 				itk = float(CartaC.replace(",","."))
-				print "=T5${0:.0f}".format(itk*100)
+				print "=T4/${0:.0f}".format(itk*100)
 			if len(Contanti)>0:
 				itk = float(Contanti.replace(",","."))
-				print "=T${0:.0f}".format(itk*100)
+				print "=T1/${0:.0f}".format(itk*100)
 			ndoc+=1
 			print "=C"
 			print
