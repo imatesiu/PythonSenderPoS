@@ -50,6 +50,7 @@ def aliquotareparto(aliquota):
 		return 9
 
 def df(line,pimp):
+	res = ""
 	importosenzasconto = line[0]
 	importoscontato = line[1]
 	imponibile = line[2]
@@ -61,25 +62,26 @@ def df(line,pimp):
 	tipodocumento = line[7]
 	importosc = float(importosenzasconto.replace(",","."))
 	if(importosc>0):
-		print("=R%s/$%s" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
+		res +=("=R%s/$%s\n\r" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
 		if len(percentualesconto)>1:
 			psconto = float(percentualesconto.replace(",","."))
-			print "=%/*"+str(psconto)
+			res += "=%/*"+str(psconto)+"\n\r"
 		else:
 			if len(valoresconto)>1 and len(vsconto)>1:
-				print "=S"
+				res += "=S\n\r"
 				vsconto = float(valoresconto.replace(",","."))
-				print "=V/$"+str(vsconto).replace(".","")
+				res += "=V/$"+str(vsconto).replace(".","")+"\n\r"
 	else:
 		if(pimp>0):
-			print "=a"
+			res += "=a"
 		else:
-			print "=K"
+			res += "=K"
+	return res
 	
 def readers():
 	spamReader = read(sys.argv[1])
 	nline = 0
-	prev = {}
+	prev = ""
 	prev2 = {}
 	taxs = []
 	rifn = ""
@@ -94,16 +96,24 @@ def readers():
 			if ddc == "ADC":
 				data = line[8]
 				#df(line,pimp)
-				#print rifn+";"+data
+				split = rifn.split("_")
+				print("=k/&%s/[/%s/]%s" % (data.replace("/","") , split[1], split[0] ))
+				print 
 			else:
 				rifn = line[8]
 				#df(line,pimp)
 		if tipo == "RDC":
 			if ddc == "RDC":
 				data = line[8]
-				#print rifn+";"+data
+				split = rifn.split("_")
+				print("=r/&%s/[/%s/]%s" % (data.replace("/","") , split[1], split[0] ))
+				print prev
+				print df(line,pimp)
+				print "=T"
+				print 
 			else:
 				rifn = line[8]
+				prev = df(line,pimp)
 		if tipo == "DC":
 			importosenzasconto = line[0]
 			importoscontato = line[1]
@@ -122,7 +132,7 @@ def readers():
 				else:
 					if len(valoresconto)>1:
 						print "=S"
-						vsconto = float(valoresconto.replace(",",".")*10)
+						vsconto = float(valoresconto.replace(",","."))*10
 						print "=V/$"+str(vsconto).replace(".","")
 			else:
 				if(pimp>0):
