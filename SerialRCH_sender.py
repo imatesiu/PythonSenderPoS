@@ -35,23 +35,23 @@ def read(filename):
 
 def aliquotareparto(aliquota):
 	if("4" in aliquota):
-		return 1
+		return 3
 	if("10" in aliquota):
 		return 2
 	if("22" in aliquota):
-		return 3
+		return 1
 	if("EE" in aliquota):
-		return 4
+		return 11
 	if("ES" in aliquota):
-		return 5
+		return 4
 	if("AL" in aliquota):
-		return 6
+		return 8
 	if("RM" in aliquota):
 		return 7
 	if("NS" in aliquota):
-		return 8
+		return 5
 	if("NI" in aliquota):
-		return 9
+		return 6
 
 def df(line,pimp):
 	res = ""
@@ -69,12 +69,43 @@ def df(line,pimp):
 		res +=("=R%s/$%s\n\r" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
 		if len(percentualesconto)>1:
 			psconto = float(percentualesconto.replace(",","."))
-			res += "=%/*"+str(psconto)+"\n\r"
+			if psconto>0:
+				res += "=%/*"+str(psconto)+"\n\r"
 		else:
 			if len(valoresconto)>1 and len(vsconto)>1:
 				res += "=S\n\r"
 				vsconto = float(valoresconto.replace(",","."))
 				res += "=V/$"+str(vsconto).replace(".","")+"\n\r"
+	else:
+		if(pimp>0):
+			res += "=a"
+		else:
+			res += "=K"
+	return res
+
+def df2(line,pimp):
+	res = ""
+	importosenzasconto = line[0]
+	importoscontato = line[1]
+	imponibile = line[2]
+	imposta = line[3]
+	aliquota = line[4]
+	percentualesconto = line[5]
+	vsconto = line[6]
+	valoresconto = line[8]
+	tipodocumento = line[7]
+	importosc = float(importoscontato.replace(",","."))
+	if(importosc>0):
+		res +=("=R%s/$%s\n\r" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
+		'''if len(percentualesconto)>1:
+			psconto = float(percentualesconto.replace(",","."))
+			if psconto>0:
+				res += "=%/*"+str(psconto)+"\n\r"
+		else:
+			if len(valoresconto)>1 and len(vsconto)>1:
+				res += "=S\n\r"
+				vsconto = float(valoresconto.replace(",","."))
+				res += "=V/$"+str(vsconto).replace(".","")+"\n\r"'''
 	else:
 		if(pimp>0):
 			res += "=a"
@@ -101,7 +132,7 @@ def readers():
 				data = line[8]
 				#df(line,pimp)
 				split = rifn.split("_")
-				print("=k/&%s/[/%s/]%s" % (datem(data) , split[1], split[0] ))
+				print("=k/&%s/[%s/]%s" % (datem(data) ,  split[0], split[1] ))
 				print 
 			else:
 				rifn = line[8]
@@ -110,9 +141,9 @@ def readers():
 			if ddc == "RDC":
 				data = line[8]
 				split = rifn.split("_")
-				print("=r/&%s/[/%s/]%s" % (datem(data) , split[1], split[0] ))
+				print("=r/&%s/[%s/]%s" % (datem(data) ,  split[0], split[1] ))
 				print prev
-				print df(line,pimp)
+				print df2(line,pimp)
 				print "=T"
 				print 
 			else:
@@ -132,12 +163,14 @@ def readers():
 				print("=R%s/$%s" % (aliquotareparto(aliquota) ,str(importosc).replace(".","")))
 				if len(percentualesconto)>1:
 					psconto = float(percentualesconto.replace(",","."))
-					print "=%/*"+str(psconto)
+					if psconto>0:
+						print "=%/*"+str(psconto)
 				else:
 					if len(valoresconto)>1:
 						print "=S"
 						vsconto = float(valoresconto.replace(",","."))*10
-						print "=V/$"+str(vsconto).replace(".","")
+						if vscont>0:
+							print "=V/$"+str(vsconto).replace(".","")
 			else:
 				if(pimp>0):
 					print "=a"
@@ -154,24 +187,29 @@ def readers():
 			Contanti = line[5]
 			if len(ticket)>0:
 				itk = float(ticket.replace(",","."))
-				print "=T5/${0:.0f}".format(itk*100)
+				if itk>0:
+					print "=T5/${0:.0f}".format(itk*100)
 			if len(bancomat)>0:
 				itk = float(bancomat.replace(",","."))
-				print "=T4/${0:.0f}".format(itk*100)
+				if itk>0:
+					print "=T4/${0:.0f}".format(itk*100)
 			if len(Credito)>0:
 				itk = float(Credito.replace(",","."))
-				print "=T2/${0:.0f}".format(itk*100)
+				if itk>0:
+					print "=T2/${0:.0f}".format(itk*100)
 			if len(Assegni)>0:
 				itk = float(Assegni.replace(",","."))
-				print "=T3/${0:.0f}".format(itk*100)
+				if itk>0:
+					print "=T3/${0:.0f}".format(itk*100)
 			if len(CartaC)>0:
 				itk = float(CartaC.replace(",","."))
-				print "=T4/${0:.0f}".format(itk*100)
+				if itk>0:
+					print "=T4/${0:.0f}".format(itk*100)
 			if len(Contanti)>0:
 				itk = float(Contanti.replace(",","."))
-				print "=T1/${0:.0f}".format(itk*100)
+				if itk>0:
+					print "=T1/${0:.0f}".format(itk*100)
 			ndoc+=1
-			print "=C"
 			print
 		ddc = tipo
 		if ndoc == 15:
