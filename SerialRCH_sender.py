@@ -22,7 +22,7 @@ from xml.dom import minidom
 
 def datem(date):
 	text = str(date)
-	datet = datetime.datetime.strptime(text, '%d/%m/%Y')
+	datet = datetime.datetime.strptime(str.strip(text), '%d/%m/%Y')
 	return datet.strftime('%d%m%y')
 
 def read(filename):
