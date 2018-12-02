@@ -63,7 +63,7 @@ def aliquotareparto(aliquota):
 	if("NS" in aliquota):
 		return 8
 	if("NI" in aliquota):
-		return 9
+		return 8
 
 def df(line,pimp):
 	importosenzasconto = line[0]
@@ -130,17 +130,19 @@ def readers():
 			vsconto = line[6]
 			valoresconto = line[8]
 			tipodocumento = line[7]
-			importosc = float(importosenzasconto.replace(",","."))#*10
+			importosc = float(importosenzasconto.replace(",","."))*10
 			if(importosc>0):
 				print("%sH%sR" % (str(importosc).replace(".",""),aliquotareparto(aliquota) ))
 				if len(percentualesconto)>1:
 					psconto = float(percentualesconto.replace(",","."))
-					print str(psconto)+"*1M"
+					if(psconto>0):
+						print str(psconto)+"*1M"
 				else:
 					if len(valoresconto)>1 and len(vsconto)>1:
 						#print "=S"
 						vsconto = float(valoresconto.replace(",","."))
-						print str(vsconto).replace(".","")+"H4M"
+						if(vsconto>0):
+							print str(vsconto).replace(".","")+"H4M"
 			else:
 				if(pimp>0):
 					print str(importosc*-1).replace(".","")+"H0M"
@@ -157,24 +159,29 @@ def readers():
 			Contanti = line[5]
 			if len(ticket)>0:
 				itk = float(ticket.replace(",","."))
-				print "{0:.0f}".format(itk*100)+"H6T"
+				if itk>0:
+					print "{0:.0f}".format(itk*100)+"H6T"
 			if len(bancomat)>0:
 				itk = float(bancomat.replace(",","."))
-				print "{0:.0f}".format(itk*100)+"H3T"
+				if itk>0:
+					print "{0:.0f}".format(itk*100)+"H3T"
 			if len(Credito)>0:
 				itk = float(Credito.replace(",","."))
-				print "{0:.0f}".format(itk*100)+"H5T"
+				if itk>0:
+					print "{0:.0f}".format(itk*100)+"H5T"
 			if len(Assegni)>0:
 				itk = float(Assegni.replace(",","."))
-				print "{0:.0f}".format(itk*100)+"H2T"
+				if itk>0:
+					print "{0:.0f}".format(itk*100)+"H2T"
 			if len(CartaC)>0:
 				itk = float(CartaC.replace(",","."))
-				print "{0:.0f}".format(itk*100)+"H3T"
+				if itk>0:
+					print "{0:.0f}".format(itk*100)+"H3T"
 			if len(Contanti)>0:
 				itk = float(Contanti.replace(",","."))
-				print "{0:.0f}".format(itk*100)+"H1T"
+				if itk>0:
+					print "{0:.0f}".format(itk*100)+"H1T"
 			ndoc+=1
-			print "=C"
 			print
 		ddc = tipo
 		if ndoc == 15:
