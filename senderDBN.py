@@ -28,13 +28,13 @@ interfaceType = "ServerRT"
 admin_user = "admin"
 admin_password = "admin"
 
-user = "AAAA0002"
+user = "AAAA0001"
 if(len(sys.argv)>2):
 	 user = sys.argv[2] 
-password = "a"
+password = "cassa"
 print user
-set_ip_server = "192.168.1.102"
-matricola = "88S25000044"
+set_ip_server = "192.168.1.10"
+matricola = "88S25000989"
 
 prevToken = ""
 
@@ -128,7 +128,7 @@ def send_hwinit():
 
 def send_configurazione_serverURL():
 	url = "ver1/api/configurazione/rete"
-	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://v-apid-ivaservizi.agenziaentrate.gov.it/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
+	content = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ConfigurazioneIP><URLAgenziaEntrate>https://192.168.1.146/v1/</URLAgenziaEntrate></ConfigurazioneIP>"
 	send_post(content, url, admin_user,admin_password)
 
 def read_configurazione_serverURL():
@@ -412,8 +412,8 @@ def loop_HW():
 		#exit(0)
 		tokenp = send_ric_token_cassa()
 		creascontrino(z,tokenp[1],tokenp[2],tokenp[0])
-		send_chiusura_cassa()	
-		#send_chiusura_server()	
+		send_chiusura_cassa(tokenp[1],tokenp[2])	
+		send_chiusura_server()	
 		exit(0)
 		time.sleep(19)
 	
@@ -437,7 +437,9 @@ def testFW():
 
 #send_chiusura_server()
 #read_mem_serverC()
-#exit(0)
+#send_configurazione_serverURL()
+loop_HW()
+exit(0)
 send_stato_server()
 #send_stato_TabellaIva()
 send_stato_cassa(user)

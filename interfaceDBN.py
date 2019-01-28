@@ -32,7 +32,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 ip_server_rt = "localhost"
 admin_user = "admin"
-admin_password = "RCH"
+admin_password = "admin"
 radice = Tk()
 pil_image = Image.open("CNR.png")
 
@@ -64,10 +64,10 @@ class MiaApp:
 		
 		Label(self.mioContenitore1, text="Intervallo: ").grid(row=2,pady=5,sticky=W)
 		v = StringVar()
-		v.set("88S25000026")
+		v.set("88S25000989")
 		self.e1 = Entry(self.mioContenitore1,textvariable=v)
 		v1 = StringVar()
-		v1.set("192.168.1.11")#192.168.1.146
+		v1.set("192.168.1.10")#192.168.1.146
 		self.e2 = Entry(self.mioContenitore1,textvariable=v1)
 		v2 = StringVar()
 		v2.set("8")
@@ -217,7 +217,7 @@ class MiaApp:
 		gt = self.e4.get()
 		gt = gt.replace(",",".")
 		self.send_init(str(self.e1.get()),gt,self.e5.get(),self.cb3.get())
-		self.thread = IlMioThread("AB120002", "aaa",self.e3.get(),self.e2.get(),self.e1.get())
+		self.thread = IlMioThread("AAAA0001", "cassa",self.e3.get(),self.e2.get(),self.e1.get())
 		self.thread.start()
 
 	
@@ -234,6 +234,7 @@ class IlMioThread (threading.Thread):
 	def __init__(self, cassa, password,second,ip,matr):
 		threading.Thread.__init__(self)
 		self.cassauser = cassa
+		print cassa
 		self.password = password
 		self.second = second
 		self.set_ip_server = ip
@@ -352,7 +353,7 @@ class IlMioThread (threading.Thread):
 
 		
 	def loop_HW(self,user,password,second):
-		self.send_configurazione_serverURL();
+		#self.send_configurazione_serverURL();
 		self.send_chiusura_cassa(user, password)
 		while not self.dead:
 			kiusura = self.send_apertura_cassa(user, password)
