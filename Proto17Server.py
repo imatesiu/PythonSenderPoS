@@ -3,6 +3,7 @@ import time
 
 from datetime import date
 
+from time import sleep
 
 
 # Create a socket
@@ -12,7 +13,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Set the client socket's TCP "well-known port" number
-well_known_port = 1234
+well_known_port = 9101
 sock.bind(('', well_known_port))
 
 # Set the number of clients waiting for connection that can be queued
@@ -82,8 +83,8 @@ def getimporto(barray):
     print(importo)
     imp  =  bytearray.fromhex(importo).decode("ASCII").rstrip('\x00').lstrip('0')
     if not imp:
-    	imp = "0,00"
-    	return imp
+        imp = "0,00"
+        return imp
     r = imp[0:len(imp)-2]+","+imp[len(imp)-2:]
     return r
     
@@ -94,8 +95,8 @@ def getimportoPax(barray):
     print(importo)
     imp  =  bytearray.fromhex(importo).decode("ASCII").rstrip('\x00').lstrip('0')
     if not imp:
-    	imp = "0,00"
-    	return imp
+        imp = "0,00"
+        return imp
     r = imp[0:len(imp)-2]+","+imp[len(imp)-2:]
     return r
   
@@ -161,7 +162,7 @@ try:
         # loop serving the new client
         while 1:
             stanstan+=10
-            receivedData = newSocket.recv(1024)
+            receivedData = newSocket.recv(2048)
             if not receivedData: break
             print("Ricevuti: ")
             print(receivedData)
@@ -181,10 +182,10 @@ try:
             opok_pax = bytearray.fromhex('0231303030303135323045303030303035333434313330303030303039353833434C4935333433343530353531303433323838313035303030303034303030303131303030303435034C')
 
             if(len(receivedData)!=len(ingenicaoinit)):
-            	r = getimportoPax(receivedData)
-            	print(r)
-            	newSocket.send(bytearray.fromhex(calcpan_pax(stanstan)))
-            	#newSocket.send(opok_pax)
+                r = getimportoPax(receivedData)
+                print(r)
+                newSocket.send(bytearray.fromhex(calcpan_pax(stanstan)))
+                #newSocket.send(opok_pax)
             
             opko = bytearray.fromhex('023130303030313035304530315452414e53415a494f4e452052494649555441544120202030303030303030303030303138383130353130303030313030303133333030303137373930373030303030313030303030303030303030300308')
             
@@ -195,14 +196,15 @@ try:
             print("Ricevuti2: ")
             print(receivedData.hex())
             
-            r = getimporto(receivedData)   
+            r = getimporto(bytearray(receivedData))    
             print(r)
             
             newSocket.send(ack)
             newSocket.send(operazioneincorso)
-            newSocket.send(opok)
-            
-            
+            #
+            sleep (2)
+            newSocket.send(opok_pax)
+            #newSocket.send(opok)
             receivedData = newSocket.recv(1024)
             if not receivedData: break
             print("Ricevuti3: ")
@@ -214,13 +216,14 @@ try:
             
             newSocket.send(testata)
             
-            receivedData = newSocket.recv(1024)
+            receivedData = newSocket.recv(2048)
             if not receivedData: break
             print("Ricevuti4: ")
             print(receivedData)
             
-            stan = bytearray.fromhex('02313030303031303530532020202020202020202020202020202020202045736572632e202020202020303030303030333030313035412e492e492e432e20202020203838313035313030303636446174612030322f30322f323220204f72612030383a3135544d4c203130303030313035205354414e203030303133304d6f642e204f6e6c696e652020202020422e432e204943434155542e20373330393620031e')
-                        
+            #stan = bytearray.fromhex('02313030303031303530532020202020202020202020202020202020202045736572632e202020202020303030303030333030313035412e492e492e432e20202020203838313035313030303636446174612030322f30322f323220204f72612030383a3135544d4c203130303030313035205354414e203030303133304d6f642e204f6e6c696e652020202020422e432e204943434155542e20373330393620031e')
+            
+            #stan = bytearray.fromhex('02313030303031303530532020202020202020202020202020202020202045736572632e202020202020303030303030333030313035412e492e492e432e20202020203838313035313030303636446174612030322f30322f323220204f72612030383a3135544d4c203130303030313035205354414e203030303133304d6f642e204f6e6c696e652020202020422e432e204943434155542e20373330393620031e')
             
             dec_stan = bytearray.fromhex('02313030303031303530532020202020202020202020202020202020202045736572632e202020202020303030303030333030313035412e492e492e432e20202020203838313035313030303031446174612030322f30322f323220204f72612031313a3038544d4c203130303030313035205354414e203030303133334d6f642e204f6e6c696e652020202020422e432e20494343412e432e203930372020200371')
             
