@@ -153,6 +153,7 @@ print(calcpan_pax(22))
 #print(cpan)
 #exit(0)
 stanstan = 30
+pax = False
 # loop waiting for connections (terminate with Ctrl-C)
 #print(bytes.fromhex(hex_val))
 try:
@@ -185,6 +186,7 @@ try:
                 r = getimportoPax(receivedData)
                 print(r)
                 newSocket.send(bytearray.fromhex(calcpan_pax(stanstan)))
+                pax = True
                 #newSocket.send(opok_pax)
             
             opko = bytearray.fromhex('023130303030313035304530315452414e53415a494f4e452052494649555441544120202030303030303030303030303138383130353130303030313030303133333030303137373930373030303030313030303030303030303030300308')
@@ -203,8 +205,10 @@ try:
             newSocket.send(operazioneincorso)
             #
             sleep (2)
-            newSocket.send(opok_pax)
-            #newSocket.send(opok)
+            if(pax):
+                newSocket.send(opok_pax)
+            else:
+                newSocket.send(opok)
             receivedData = newSocket.recv(1024)
             if not receivedData: break
             print("Ricevuti3: ")
