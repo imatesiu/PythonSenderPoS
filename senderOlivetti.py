@@ -15,8 +15,8 @@ def send(msg):
 
 #opened_socket = conn(ip,port)	
 	
-ip = "192.168.1.611"
-port =9000
+ip = "146.48.84.159"
+port =9100
 
 def send2(msg):
   try:
@@ -41,7 +41,7 @@ date = "17052022"
 Matricola = ""
 #reso
 i = 1 
-for cicli in range(1,2):
+for cicli in range(1,101):
 	s = '022431333232213203'
 	invia  =  s.decode('hex')
 	send2(invia)
@@ -51,32 +51,47 @@ for cicli in range(1,2):
 	s= '0224313332352531302c30302d56656e64697461204956412031213103'
 	invia  =  s.decode('hex')
 	send2(invia)
-	time.sleep(2)
+	time.sleep(1)
 	s = '02243133353521312531302c303003'
 	invia  =  s.decode('hex')
 	send2(invia)
 	s = '0224313332352531302c30302d56656e64697461204956412032213203'
 	invia  =  s.decode('hex')
-	send2(invia)
-
+	#send2(invia)
+#pagemnto contanti
 	s = '02243133323903'
 	invia  =  s.decode('hex')
+#	send2(invia)
+#codice scontrino digitale
+	s = '0224353330312131213128544f504f4c494e4f2020213103'
+	invia  =  s.decode('hex')
 	send2(invia)
+
+	s = '022431303332202028464c30313130373403'
+	invia  =  s.decode('hex')
+	send2(invia)
+
+#pagamento ele
+	s = '0224313332392022343503'
+	invia  =  s.decode('hex')
+	send2(invia)    
 
 	s = '02243133323303'
 	invia  =  s.decode('hex')
 	send2(invia)
-	
+	i+=1
+	print cicli
+	time.sleep(2)	
 	
 	#chiusura
-	s = '022333313221312a5265706f72742031303a03'
+	'''s = '022333313221312a5265706f72742031303a03'
 	invia  =  s.decode('hex')
 	send2(invia)
 	s = '022333313221322d5a3130202d2066697363616c6503'
 	invia  =  s.decode('hex')
 	send2(invia)
 	
-	s = '02243133333303'
+	s = '0224313332392022343503'
 	invia  =  s.decode('hex')
 	send2(invia)
 	s = '0223333132213136526573657420636f6e7461746f72692028313333342903'
@@ -90,10 +105,8 @@ for cicli in range(1,2):
 	send2(invia)
 	s = '022333313221323633302f30362f323032322c2031363a32373a31362e3503'
 	invia  =  s.decode('hex')
-	send2(invia)
-	i+=1
-	print cicli
-	time.sleep(10)
+	send2(invia)'''
+
 	
 exit(0)
 for cicli in range(2,102):

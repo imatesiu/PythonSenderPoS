@@ -13,7 +13,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Set the client socket's TCP "well-known port" number
-well_known_port = 9101
+well_known_port = 1000
 sock.bind(('', well_known_port))
 
 # Set the number of clients waiting for connection that can be queued
@@ -53,13 +53,14 @@ def calcstan(stan):
     return pre
     
 def calcpan(importo):
+    numStr = importo.rjust(8, ' ')
     if(len(importo)==5):
        numStr = importo.rjust(8, ' ')
     if(len(importo)==6):
        numStr = importo.rjust(7, ' ')
     if(len(importo)==4):
        numStr = importo.rjust(9, ' ')
-    print(numStr)
+    #print(numStr)
     simponto = numStr.encode('utf-8').hex()
     print(simponto)
     #pre = '023130303030313035305320202020202020202020202020415554482E524553502E434F44452020202020202020303050414E20202020203637363231302A2A2A2A2A2A3539343943564D2050696E204F6E6C696E65202020202020202020202020202020202020202020202020202020202020202020207F494D504F52544F2045555220202020'
