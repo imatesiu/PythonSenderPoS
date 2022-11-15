@@ -33,6 +33,30 @@ print(hex(lrc))
 
 #exit(0)
 
+def calcstanslim(stan,importo):
+    tempodata = time.strftime("%d/%m/%y").encode('utf-8')
+    tempoora = time.strftime("%H:%M").encode('utf-8')
+    sst = format(stan, '06').encode('utf-8')
+    pre = "0231303030303233353053202020202020204d41535445524341524420202020202020202020204d415354455243415244204348495020202020207f2020202020202020414351554953544f2020202020202020202020202020434E522053534520202020202020202020202043524544495420434152442020202020202020202020202020202020202020202020202020202020202045736572632e202020202020303030303030333030323331412e492e492e432e202020202038383130353130303030344461746120"
+    hexdata = tempodata.hex()
+    pre = pre + hexdata +'20204F726120'
+    hexora = tempoora.hex()
+    pre = pre + hexora + '544D4C203130303030313035205354414E20'
+    hexsst = sst.hex()
+    pre = pre + hexsst + '4D6F642E204F6E6C696E652020202020422E432E204943434155542E20313531333620204F5045522E20303030313032415554482E524553502E434F44452020202020202020303050414E20202020202A2A2A2A2A2A2A2A2A2A2A2A3535343153434144202020202020202020202020202020202A2A2A2A43564D2050696E204F66666C696E652020202020202020202020202020202020202020202020202020202020202020207F494D504F52544F20455552202020202020202020'
+    numStr = importo.rjust(8, ' ')
+    if(len(importo)==5):
+       numStr = importo.rjust(8, ' ')
+    if(len(importo)==6):
+       numStr = importo.rjust(7, ' ')
+    if(len(importo)==4):
+       numStr = importo.rjust(9, ' ')
+    simponto = numStr.encode('utf-8').hex()
+    pre = pre + simponto + "202020202020202020202020202020202020202020202020205452414e53415a494f4e4520415050524f564154412020202020202020202020202020202020202020202020202020202020202020"
+    res = bytearray.fromhex(pre)
+    lrc = str(hex(calculate_LRC(res)))[2:4]
+    pre = pre + lrc
+    return pre
 
 def calcstan(stan):
     tempodata = time.strftime("%d/%m/%y").encode('utf-8')
@@ -76,6 +100,10 @@ def calfine():
     res = bytearray.fromhex(pre)
     lrc = str(hex(calculate_LRC(res)))[2:4]
     pre = pre + lrc
+    return pre
+
+def calfineslim():
+    pre = "02313030303032333530532020474f4f442042594520202020202020207d7d1b037e"
     return pre
     
 def getimporto(barray):
@@ -169,7 +197,8 @@ try:
             print("Ricevuti: ")
             print(receivedData)
             # Echo back the same data you just received 023030303030303030304531033a
-            ingenicaoinit  =  bytearray.fromhex('023030303030303030304531033a')
+            ingenicaoinit      =  bytearray.fromhex('023030303030303030304531033a')
+            ingenicaoinitslim  =  bytearray.fromhex('023130303030323335304531033f')
             ack = bytearray.fromhex('06037A')
             statuspos =  bytearray.fromhex('0200000000000000003074033A')
             wait = bytearray.fromhex('01003A')
