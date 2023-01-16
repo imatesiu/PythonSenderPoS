@@ -1,9 +1,17 @@
 import socket
 import time
+import signal
 
 from datetime import date
 
 from time import sleep
+
+def handler(signum, frame):
+    res = input("Ctrl-c was pressed. Do you really want to exit? y/n ")
+    if res == 'y':
+        exit(1)
+ 
+signal.signal(signal.SIGINT, handler)
 
 
 # Create a socket
@@ -195,6 +203,7 @@ try:
         print("Connected from", address)
         # loop serving the new client
         while 1:
+         try:
             stanstan+=10
             receivedData = newSocket.recv(2048)
             if not receivedData: break
@@ -217,7 +226,7 @@ try:
             opok_pax = bytearray.fromhex('0231303030303135323045303030303035333434313330303030303039353833434C4935333433343530353531303433323838313035303030303034303030303131303030303435034C')
 
             if(ingenicaoinit==receivedData):
-                bandiera = True
+                bandiera = False
 
             if(len(receivedData)!=len(ingenicaoinit)):
                 r = getimportoPax(receivedData)
@@ -321,8 +330,10 @@ try:
             print("Ricevuti7: ")
             print(receivedData)
 
-
+         except KeyboardInterrupt:
+           print('Server closing')
         newSocket.close()
         print("Disconnected from", address)
+
 finally:
     sock.close()
