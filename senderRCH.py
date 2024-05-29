@@ -11,34 +11,12 @@ def send(msg):
 	print msg
 	res = opened_socket.send(msg)
 	print res
-	data = opened_socket.recv(1024).encode('hex')
-	print data
 	
-def calculatecrc(msg):	
-	init = '02'
-	final = '03'
-	cks = 0
-	stringa = ''
-	for elem in msg:
-		cks += ord(elem)
-	cks = (cks & 255) % 100
-	stringa = msg + str(cks)
-	#print stringa
-	outHex = '02'
-	for element in stringa:
-		outHex += hex(ord(element))
-	
-	#print outHex + '03'
-	return (outHex + '03').replace("0x","").upper()
-		
+
 #opened_socket = conn(ip,port)	
 	
-ip = "146.48.89.30"
-#s = '3/S/%22 BENE//1/1/1///0/0/'
-#print calculatecrc(s)
-#exit(0)
-#ip = "192.168.1.237"
-port =9103
+ip = "146.48.84.159"
+port =23
 
 def send2(msg):
   try:
@@ -46,16 +24,14 @@ def send2(msg):
 	opened_socket2.connect((ip, port))
 	print msg
 	opened_socket2.send(msg)
-	data = opened_socket2.recv(1024).encode('hex')
+	data = opened_socket2.recv(1024).decode()
 	print data
 	opened_socket2.close()
   except Exception as e:
   	print str(e)
-opened_socket  = conn(ip,port)
+
 k=147
 
-init = '0x02'
-final = '0x03'
 
 #Lotteria
 #
@@ -66,23 +42,38 @@ Matricola = ""
 #reso
 i = 1 
 for cicli in range(1,2):
-	si = '02282f383703'
-	#s= '\/80////1234567890/////////sseapid.isti.cnr.it/sseapid.isti.cnr.it//////'
-	#invia  =  s#.decode('hex')
-	send(si.decode('hex'))
-	s = '3/S/%22 BENE//1/1/1///0/0/'
-	invia  =  s#.decode('hex')
-	send(calculatecrc(invia).decode('hex'))
-	send(si.decode('hex'))
-	exit(0)
-	s= '5/1/0'
-	invia  =  s#.decode('hex')
-	send2(calculatecrc(invia))
+	s = '0230313030324e3d4b31333803'
+	invia  =  s.decode('hex')
+	send2(invia)
+	s = '0230313030334e3d433132303303'
+	invia  =  s.decode('hex')
+	send2(invia)
+	s= '0230313031394e3d52312f243135302f2842454e45202241222933363403'
+	invia  =  s.decode('hex')
+	send2(invia)
 	time.sleep(2)
-	s = 'x/7'
-	invia  =  s#.decode('hex')
-	send2(calculatecrc(invia))
+	s = '0230313030334e3d543534313603'
+	invia  =  s.decode('hex')
+	send2(invia)
+	s = '0230313030324e3d6335313403'
+	invia  =  s.decode('hex')
+	send2(invia)
 	
+	
+	#chiusura
+	s = '0230313030334e3d433331303203'
+	invia  =  s.decode('hex')
+	send2(invia)
+	s = '0230313030344e3d43313032333403'
+	invia  =  s.decode('hex')
+	send2(invia)
+	
+	s = '0230313030354e3c3c2f3f7336324403'
+	invia  =  s.decode('hex')
+	send2(invia)
+	i+=1
+	print cicli
+	time.sleep(10)
 	
 exit(0)
 for cicli in range(2,102):

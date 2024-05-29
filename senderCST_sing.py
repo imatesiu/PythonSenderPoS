@@ -26,7 +26,7 @@ lottery_client_code = "12345678"
 if(len(sys.argv)>2):
 	 user = sys.argv[2]
 password = "admin"
-set_ip_server = "192.168.1.12"
+set_ip_server = "192.168.1.112"
 matricola = "96SRT000109"
 #matricola = "53SNS310003"
 

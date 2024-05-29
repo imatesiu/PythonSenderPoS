@@ -10,10 +10,11 @@ def conn(ip,port):
 def send(msg):
 	print msg
 	opened_socket.send(msg)
+	time.sleep(2)
 	#print res
 	
 	
-ip = "192.168.1.31"
+ip = "192.168.1.77"
 #cash port =1126
 port =1723
 
@@ -33,20 +34,23 @@ n9T  BUONO MONOUSO(n is vat)
 '''
 
 
-k=147
+k=60
 opened_socket = conn(ip,port)
-#send("\"1234567A\"@38F")
-'''
-send("15000H3R")
-send("\"1234567A\"38F")
+#send("\"12345678\"@38F")
+onetoten = range(1,99)
+for count in onetoten:
+	send("150H3R")
+	send("\"1234567A\"38F")
+	#send("=")
 
-send("=")
-
-send("102T")
+	send("3T")
+	
+	time.sleep(3)
 
 exit(0)
 '''
-send("\"1234567A\"38F")
+
+send("\"12345678\"38F")
 send("15000H23R")
 send("5000H14M")
 send("2405H21R")
@@ -59,9 +63,8 @@ send("12000H3T")
 send("2200H103T")
 send("1T")
 time.sleep(13)
-
 send("13322H22R")
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("2000H14M")
 send("3300H21R")
 send("3300H13M")
@@ -73,8 +76,7 @@ send("2000H103T")
 send("1000H106T")
 send("15000H1T")
 time.sleep(10)
-
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("3500H27R")
 send("2000H14M")
 send("5600H21R")
@@ -83,8 +85,7 @@ send("1256H1R")
 send("=")
 send("104T")
 time.sleep(13)
-
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("2817H28R")
 send("1000H16M")
 send("3889H21R")
@@ -96,8 +97,7 @@ send("1500H106T")
 send("700H105T")
 send("12000H1T")
 time.sleep(13)
-
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("2889H26R")
 send("8888H29R")
 send("2000H23R")
@@ -105,7 +105,7 @@ send("2000H13M")
 send("=")
 send("102T")
 time.sleep(10)
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("3800H21R")
 send("1333H23R")
 send("2000H3R")
@@ -113,14 +113,14 @@ send("2000H13M")
 send("=")
 send("1T")
 time.sleep(13)
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("2647H21R")
 send("2000H23R")
 send("2000H13M")
 send("=")
 send("1T")
 time.sleep(10)
-send("\"1234567A\"38F")
+send("\"12345678\"38F")
 send("3345H21R")
 send("2000H21R")
 send("2000H13M")
@@ -128,7 +128,7 @@ send("=")
 send("345H100T")
 send("3000H1T")
 '''
-
+'''
 send("\""+str(k).zfill(4)+"-0001\"51F")
 
 send("15000H23R")
@@ -142,8 +142,7 @@ send("700H2T")
 send("12000H3T")
 send("2200H103T")
 send("1T")
-value = raw_input("Please enter a string:\n")
-
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0002\"51F")
 send("13322H22R")
 send("2000H14M")
@@ -156,7 +155,7 @@ send("200H105T")
 send("2000H103T")
 send("1000H106T")
 send("15000H1T")
-value = raw_input("Please enter a string:\n")
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0003\"51F")
 send("3500H27R")
 send("2000H14M")
@@ -165,8 +164,7 @@ send("6654H4R")
 send("1256H1R")
 send("=")
 send("104T")
-value = raw_input("Please enter a string:\n")
-
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0004\"51F")
 send("2817H28R")
 send("1000H16M")
@@ -178,7 +176,7 @@ send("1000H107T")
 send("1500H106T")
 send("700H105T")
 send("12000H1T")
-value = raw_input("Please enter a string:\n")
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0005\"51F")
 send("2889H26R")
 send("8888H29R")
@@ -186,7 +184,7 @@ send("2000H23R")
 send("2000H13M")
 send("=")
 send("102T")
-value = raw_input("Please enter a string:\n")
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0006\"51F")
 send("3800H21R")
 send("1333H23R")
@@ -194,37 +192,36 @@ send("2000H3R")
 send("2000H13M")
 send("=")
 send("1T")
-value = raw_input("Please enter a string:\n")
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0007\"51F")
 send("2647H21R")
 send("2000H23R")
 send("2000H13M")
 send("=")
 send("1T")
-value = raw_input("Please enter a string:\n")
+time.sleep(13)
 send("\""+str(k).zfill(4)+"-0008\"51F")
 send("3345H21R")
 send("2000H21R")
 send("2000H13M")
-send("=")
+send("=")'''
 send("3000H1T")
 send("345H100T")
 
-value = raw_input("Please enter a string:\n")
 
-
+exit(0)
 
 send("z1Fc")
 exit(0)
 
-'''
 
-k=152
+
+k=58
 for count in range(1,10):
 	messaggio = "\""+str(k).zfill(4)+"-"+str(count).zfill(4)+"\"52F"
 	send(messaggio)
 	time.sleep(20)
-#send("z1Fc")
+send("z1Fc")
 exit(0)	
 
 #"0100-0002"52F

@@ -1,0 +1,283 @@
+{"data": {"cashuuid": "AAAA0001"}}
+****RESPONSE****
+{"cashDesc":"a","cashHmacKey":"7CxEChQepDLU7AQcZG54fJOpv9WrARfDQ9PbhZvzxwM=","cashLastDocNumber":"4","cashName":"0001","cashShop":"AAAA","cashStatus":"0","cashToken":"VEqrJ/y/jm9CaGwSUe5zNGkg9eDzxpssG4Tja53hqLY=","dateTimeServer":"2018-10-24 13:15:13","fiscalBoxID":"88S25000036","grandTotalDB":"0","numberClosure":"168","responseCode":0,"responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0}}
+****RESPONSE _ END****
+{u'cashToken': u'VEqrJ/y/jm9CaGwSUe5zNGkg9eDzxpssG4Tja53hqLY=', u'grandTotalDB': u'0', u'cashShop': u'AAAA', u'cashName': u'0001', u'cashLastDocNumber': u'4', u'responseErr': {u'warnEjFull': 0, u'warnHwinitMax': 0, u'errHwinitMax': 0, u'warnCount': 0, u'errCount': 0, u'errMkeyPresent': 0, u'errMkeyValid': 0, u'errFmFull': 0, u'warnFmFullVal': 0, u'errEjFull': 0, u'errFmPresent': 0, u'warnEjFullVal': 0, u'warnFmFull': 0, u'errCertExpired': 0, u'errEjPresent': 0, u'warnHwinitVal': 0, u'warnCertExpired': 0, u'errFmStatus': 0}, u'numberClosure': u'168', u'dateTimeServer': u'2018-10-24 13:15:13', u'cashHmacKey': u'7CxEChQepDLU7AQcZG54fJOpv9WrARfDQ9PbhZvzxwM=', u'cashStatus': u'0', u'responseCode': 0, u'cashDesc': u'a', u'fiscalBoxID': u'88S25000036'}
+##########
+{'data': {'cashuuid': 'AAAA0001', 'dtime': '2018-10-24 13:15:28'}}
+****RESPONSE****
+{"cashDesc":"a","cashHmacKey":"7CxEChQepDLU7AQcZG54fJOpv9WrARfDQ9PbhZvzxwM=","cashLastDocNumber":"0","cashName":"0001","cashShop":"AAAA","cashStatus":"1","cashToken":"VEqrJ/y/jm9CaGwSUe5zNGkg9eDzxpssG4Tja53hqLY=","dateTimeServer":"2018-10-24 13:15:14","fiscalBoxID":"88S25000036","grandTotalDB":"0","numberClosure":"168","responseCode":0,"responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0}}
+****RESPONSE _ END****
+169 1 7CxEChQepDLU7AQcZG54fJOpv9WrARfDQ9PbhZvzxwM=
+#########createdoc########
+#####
+150.0
+150
+15000
+50.0
+50
+5000
+200.0
+200
+20000
+0.0
+0
+0
+GKbK2jwe7HCQ1tPL0WxQeVhgZ9s8206LDkMgiRfMhW8=
+88S25000036;AAAA0001;169;1
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     150 D\", \"vatpercentage\": \"2200\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 15000, \"grossamount\": 15000, \"vatvalue\": 2200, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"150\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     50 D\", \"vatpercentage\": \"400\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5000, \"grossamount\": 5000, \"vatvalue\": 400, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"50\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     200 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 20000, \"grossamount\": 20000, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"200\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                28,97\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"28,97\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 150\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 15000, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 35\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 3500, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 15\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 1500, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00001\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 20000, \"grossamount\": 20000, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"1\", \"trxtotal\": 20000, \"grandTotal\": 0, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"VEqrJ/y/jm9CaGwSUe5zNGkg9eDzxpssG4Tja53hqLY=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 400, \"gross\": 5000, \"tax\": 192, \"exemptioncode\": \"\"}, {\"vatpercentage\": 2200, \"gross\": 15000, \"tax\": 2705, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "GKbK2jwe7HCQ1tPL0WxQeVhgZ9s8206LDkMgiRfMhW8=", "addInfo": "", "signature": "XefOf9ee1uaq9KTBW9feA/u5yazv6RbELAe8JoZGSyo="}}
+5DE7CE7FD79ED6E6AAF4A4C15BD7DE03FBB9C9ACEFE916C42C07BC2686464B2A
+#########################
+#########################
+#########################
+****RESPONSE****
+{"fiscalDocID":1,"responseCode":0,"responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0}}
+****RESPONSE _ END****
+exit 2
+150.0
+150
+15000
+50.0
+50
+5000
+5;1
+200.0
+200
+20000
+0.0
+0
+0
+I86/g/CmzidcYwJBObpzP+W/nmj416Ct+jOOaRbZqhc=
+88S25000036;AAAA0001;169;2
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     150 D\", \"vatpercentage\": \"2200\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 15000, \"grossamount\": 15000, \"vatvalue\": 2200, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"150\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     50 D\", \"vatpercentage\": \"400\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5000, \"grossamount\": 5000, \"vatvalue\": 400, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"50\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     200 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 20000, \"grossamount\": 20000, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"200\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                28,97\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"28,97\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 24\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 2400, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 56\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 5600, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 120\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 12000, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00002\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 20000, \"grossamount\": 20000, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"2\", \"trxtotal\": 20000, \"grandTotal\": 20000, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"5\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"169\", \"referenceDtime\": \"2018-10-24 13:15\", \"prevSignature\": \"XefOf9ee1uaq9KTBW9feA/u5yazv6RbELAe8JoZGSyo=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 400, \"gross\": 5000, \"tax\": 192, \"exemptioncode\": \"\"}, {\"vatpercentage\": 2200, \"gross\": 15000, \"tax\": 2705, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "I86/g/CmzidcYwJBObpzP+W/nmj416Ct+jOOaRbZqhc=", "addInfo": "", "signature": "KXIQnVHqsYaHxGOhCoE0C7plI3FmAN9fz5UCsMn5UOM="}}
+2972109D51EAB18687C463A10A81340BBA6523716600DF5FCF9502B0C9F950E3
+#########################
+#########################
+#########################
+****RESPONSE****
+{"fiscalDocID":2,"responseCode":0,"responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0}}
+****RESPONSE _ END****
+exit 3
+ciao
+42.3
+42,3
+4230
+ciao
+40.61
+40,61
+4061
+82.91
+82,91
+8291
+0.0
+0
+0
+V6vKg23tLqPvU1YnlAM9ESktoJYrdb5FdpUwEMo9Y34=
+88S25000036;AAAA0001;169;3
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     42,3 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 4230, \"grossamount\": 4230, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"42,3\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     40,61 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 4061, \"grossamount\": 4061, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"40,61\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     82,91 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 8291, \"grossamount\": 8291, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"82,91\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 22,91\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 2291, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 20\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 2000, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 40\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 4000, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00003\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 8291, \"grossamount\": 8291, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"3\", \"trxtotal\": 8291, \"grandTotal\": 20000, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"KXIQnVHqsYaHxGOhCoE0C7plI3FmAN9fz5UCsMn5UOM=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 4230, \"tax\": 0, \"exemptioncode\": \"N1\"}, {\"vatpercentage\": 0, \"gross\": 4061, \"tax\": 0, \"exemptioncode\": \"N2\"}]}", "qrData": {"shaMetadata": "V6vKg23tLqPvU1YnlAM9ESktoJYrdb5FdpUwEMo9Y34=", "addInfo": "", "signature": "IjJpMBe3ne00NMXphEa7gcvME6hbPGHYOOB0WyacnjY="}}
+2232693017B79DED3434C5E98446BB81CBCC13A85B3C61D838E0745B269C9E36
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 4
+ciao
+1.0
+1
+100
+5.0
+5
+500
+6.0
+6
+600
+0.0
+0
+0
+X7n0YXw4PENlZeQ+CE15NDZbJfECY5v8V3/GA7/soHE=
+88S25000036;AAAA0001;169;4
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     1 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 100, \"grossamount\": 100, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"1\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     5 D\", \"vatpercentage\": \"1000\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 500, \"grossamount\": 500, \"vatvalue\": 1000, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"5\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     6 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 600, \"grossamount\": 600, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"6\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0,45\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0,45\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 4\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 400, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 1\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 100, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 1\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 100, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00004\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 600, \"grossamount\": 600, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"4\", \"trxtotal\": 600, \"grandTotal\": 28291, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"IjJpMBe3ne00NMXphEa7gcvME6hbPGHYOOB0WyacnjY=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 100, \"tax\": 0, \"exemptioncode\": \"N3\"}, {\"vatpercentage\": 1000, \"gross\": 500, \"tax\": 45, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "X7n0YXw4PENlZeQ+CE15NDZbJfECY5v8V3/GA7/soHE=", "addInfo": "", "signature": "w0qk6CTnS91baqhzGKfxIQ5PmNMrQWk0rzyr1oeooqQ="}}
+C34AA4E824E74BDD5B6AA87318A7F1210E4F98D32B416934AF3CABD687A8A2A4
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 5
+ciao
+49.5
+49,5
+4950
+ciao
+136.0
+136
+13600
+185.5
+185,5
+18550
+0.0
+0
+0
+BXhG52IkpkL7s6aTlk5pOtP/uiU29Zx2bnfypRgThvQ=
+88S25000036;AAAA0001;169;5
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     49,5 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 4950, \"grossamount\": 4950, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"49,5\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     136 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 13600, \"grossamount\": 13600, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"136\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     185,5 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 18550, \"grossamount\": 18550, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"185,5\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 120\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 12000, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 55\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 5500, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 10,5\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 1050, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00005\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 18550, \"grossamount\": 18550, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"5\", \"trxtotal\": 18550, \"grandTotal\": 28891, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"w0qk6CTnS91baqhzGKfxIQ5PmNMrQWk0rzyr1oeooqQ=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 4950, \"tax\": 0, \"exemptioncode\": \"N4\"}, {\"vatpercentage\": 0, \"gross\": 13600, \"tax\": 0, \"exemptioncode\": \"N5\"}]}", "qrData": {"shaMetadata": "BXhG52IkpkL7s6aTlk5pOtP/uiU29Zx2bnfypRgThvQ=", "addInfo": "", "signature": "hHd2i0oMea+Ke7DSY8mOGt4Oaqqw4nxVg19Oozk6rAA="}}
+8477768B4A0C79AF8A7BB0D263C98E1ADE0E6AAAB0E27C55835F4EA3393AAC00
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 6
+ciao
+42.3
+42,3
+4230
+ciao
+40.61
+40,61
+4061
+3;3
+82.91
+82,91
+8291
+0.0
+0
+0
+cZ1cv+Qcr6dSCt9NsnNRDtCyKwyOK63f+nN8Ap7ceaE=
+88S25000036;AAAA0001;169;6
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     42,3 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 4230, \"grossamount\": 4230, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"42,3\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     40,61 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 4061, \"grossamount\": 4061, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"40,61\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     82,91 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 8291, \"grossamount\": 8291, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"82,91\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 5,91\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 591, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 33\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 3300, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 44\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 4400, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00006\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 8291, \"grossamount\": 8291, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"6\", \"trxtotal\": 8291, \"grandTotal\": 47441, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"3\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"3\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"169\", \"referenceDtime\": \"2018-10-24 13:15\", \"prevSignature\": \"hHd2i0oMea+Ke7DSY8mOGt4Oaqqw4nxVg19Oozk6rAA=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 4230, \"tax\": 0, \"exemptioncode\": \"N1\"}, {\"vatpercentage\": 0, \"gross\": 4061, \"tax\": 0, \"exemptioncode\": \"N2\"}]}", "qrData": {"shaMetadata": "cZ1cv+Qcr6dSCt9NsnNRDtCyKwyOK63f+nN8Ap7ceaE=", "addInfo": "", "signature": "UAlOQk/2gStNAQleoEDbAsIdOxrMaVNL1n6jK412uiE="}}
+50094E424FF6812B4D01095EA040DB02C21D3B1ACC69534BD67EA32B8D76BA21
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 7
+0.05
+0,05
+5
+64.36
+64,36
+6436
+64.41
+64,41
+6441
+0.0
+0
+0
+WXCDiFFgp1Tv9mHX1K6gGHrzPU19W0+DqEDtR9z8w0w=
+88S25000036;AAAA0001;169;7
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     0,05 D\", \"vatpercentage\": \"1000\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5, \"grossamount\": 5, \"vatvalue\": 1000, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"0,05\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     64,36 D\", \"vatpercentage\": \"400\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 6436, \"grossamount\": 6436, \"vatvalue\": 400, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"64,36\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     64,41 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 6441, \"grossamount\": 6441, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"64,41\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                2,48\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"2,48\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 29,41\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 2941, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 30\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 3000, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 5\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 500, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00007\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 6441, \"grossamount\": 6441, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"7\", \"trxtotal\": 6441, \"grandTotal\": 47441, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"UAlOQk/2gStNAQleoEDbAsIdOxrMaVNL1n6jK412uiE=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 400, \"gross\": 6436, \"tax\": 248, \"exemptioncode\": \"\"}, {\"vatpercentage\": 1000, \"gross\": 5, \"tax\": 0, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "WXCDiFFgp1Tv9mHX1K6gGHrzPU19W0+DqEDtR9z8w0w=", "addInfo": "", "signature": "UHLJb/7ZqLNzP8znBtbBWEWLvHeMoe9O1D52vYM3qOQ="}}
+5072C96FFED9A8B3733FCCE706D6C158458BBC778CA1EF4ED43E76BD8337A8E4
+#########################
+#########################
+#########################
+****RESPONSE****
+{"fiscalDocID":3,"responseCode":1003,"responseDesc":"Errore ServerRT per cassa AAAA0001: 12100 - Documento non conforme: CCDC precedente errato","responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0},"responseSubCode":[9004]}
+****RESPONSE _ END****
+exit 8
+0.05
+0,05
+5
+ciao
+42.7
+42,7
+4270
+42.75
+42,75
+4275
+0.0
+0
+0
+FU70GMHFJqOB/7BZs6GDDLHAJAK6YRuAjE6P55xaLSc=
+88S25000036;AAAA0001;169;8
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     0,05 D\", \"vatpercentage\": \"1000\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5, \"grossamount\": 5, \"vatvalue\": 1000, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"0,05\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     42,7 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 4270, \"grossamount\": 4270, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"42,7\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     42,75 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 4275, \"grossamount\": 4275, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"42,75\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 33\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 3300, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 6\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 600, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 3,75\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 375, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00008\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 4275, \"grossamount\": 4275, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"8\", \"trxtotal\": 4275, \"grandTotal\": 53882, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"UHLJb/7ZqLNzP8znBtbBWEWLvHeMoe9O1D52vYM3qOQ=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 4270, \"tax\": 0, \"exemptioncode\": \"N6\"}, {\"vatpercentage\": 1000, \"gross\": 5, \"tax\": 0, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "FU70GMHFJqOB/7BZs6GDDLHAJAK6YRuAjE6P55xaLSc=", "addInfo": "", "signature": "PS/2kbrwbNHsghqJpqA75LFC7vdMz1DAQvjg38NLhjU="}}
+3D2FF691BAF06CD1EC821A89A6A03BE4B142EEF74CCF50C042F8E0DFC34B8635
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 9
+0.05
+0,05
+5
+5.55
+5,55
+555
+5.6
+5,6
+560
+0.0
+0
+0
+b76aeaHDJBspPADjefQ+WEaxTXIlwdjL1FQCsGXuFPc=
+88S25000036;AAAA0001;169;9
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     0,05 D\", \"vatpercentage\": \"1000\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5, \"grossamount\": 5, \"vatvalue\": 1000, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"0,05\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     5,55 D\", \"vatpercentage\": \"2200\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 555, \"grossamount\": 555, \"vatvalue\": 2200, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"5,55\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     5,6 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 560, \"grossamount\": 560, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"5,6\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                1\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"1\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 0,6\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 60, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 3\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 300, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 2\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 200, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00009\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 560, \"grossamount\": 560, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"9\", \"trxtotal\": 560, \"grandTotal\": 58157, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"PS/2kbrwbNHsghqJpqA75LFC7vdMz1DAQvjg38NLhjU=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 1000, \"gross\": 5, \"tax\": 0, \"exemptioncode\": \"\"}, {\"vatpercentage\": 2200, \"gross\": 555, \"tax\": 100, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "b76aeaHDJBspPADjefQ+WEaxTXIlwdjL1FQCsGXuFPc=", "addInfo": "", "signature": "ym94zT+8bJdyJcjGz+0vhhwOh1FzxnFz1oOXbHUUM1Q="}}
+CA6F78CD3FBC6C977225C8C6CFED2F861C0E875173C67173D683976C75143354
+#########################
+#########################
+#########################
+****RESPONSE****
+{"fiscalDocID":4,"responseCode":1003,"responseDesc":"Errore ServerRT per cassa AAAA0001: 12100 - Documento non conforme: CCDC precedente errato","responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0},"responseSubCode":[9004]}
+****RESPONSE _ END****
+exit 10
+0.05
+0,05
+5
+ciao
+1.5
+1,5
+150
+1.55
+1,55
+155
+0.0
+0
+0
+e0BSHA62bvofvb3OycXFW2HFEyFGjccURdYKq28DFRw=
+88S25000036;AAAA0001;169;10
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     0,05 D\", \"vatpercentage\": \"1000\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5, \"grossamount\": 5, \"vatvalue\": 1000, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"0,05\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     1,5 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 150, \"grossamount\": 150, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"1,5\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     1,55 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 155, \"grossamount\": 155, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"1,55\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 1\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 100, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 0,05\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 5, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 0,5\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 50, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00010\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 155, \"grossamount\": 155, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"10\", \"trxtotal\": 155, \"grandTotal\": 58717, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"ym94zT+8bJdyJcjGz+0vhhwOh1FzxnFz1oOXbHUUM1Q=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 150, \"tax\": 0, \"exemptioncode\": \"N6\"}, {\"vatpercentage\": 1000, \"gross\": 5, \"tax\": 0, \"exemptioncode\": \"\"}]}", "qrData": {"shaMetadata": "e0BSHA62bvofvb3OycXFW2HFEyFGjccURdYKq28DFRw=", "addInfo": "", "signature": "UfO7cJZVEykPv98OFJ1ohgIGP1gmtyR0oGhVcYL9JWY="}}
+51F3BB70965513290FBFDF0E149D688602063F5826B72474A068557182FD2566
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 11
+ciao
+0.05
+0,05
+5
+ciao
+1.5
+1,5
+150
+1.55
+1,55
+155
+0.0
+0
+0
+q1oVevMX0L3ea7ibRNTVQ6IATPk1MRZFoO4TJNfmsJ4=
+88S25000036;AAAA0001;169;11
+{"fiscalData": "{\"items\": [{\"plu\": \"1\", \"description\": \"VENDITA                     0,05 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 5, \"grossamount\": 5, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"0,05\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"VENDITA                     1,5 D\", \"vatpercentage\": \"0\", \"type\": \"1\", \"paymentid\": \"\", \"netamount\": 150, \"grossamount\": 150, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"1,5\", \"quantity\": \"1000\"}, {\"plu\": \"1\", \"description\": \"TOTALE  COMPLESSIVO                     1,55 D\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 155, \"grossamount\": 155, \"vatvalue\": 0, \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"1\", \"signid\": \"1\", \"unitprice\": \"1,55\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"DI CUI IVA                0\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": \"0\", \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CONTANTI 0,15\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"1\", \"netamount\": 15, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO BANCOMAT 0,4\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"2\", \"netamount\": 40, \"grossamount\": \"0\", \"vatvalue\": \"\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO CREDITO 1\", \"vatpercentage\": \"0\", \"type\": \"5\", \"paymentid\": \"3\", \"netamount\": 100, \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"PAGAMENTO RESTO 0\", \"vatpercentage\": \"0\", \"type\": \"97\", \"paymentid\": \"0\", \"netamount\": \"0\", \"grossamount\": \"0\", \"fiscalvoid\": \"\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"\", \"unitprice\": \"0\", \"quantity\": \"1000\"}, {\"plu\": \"\", \"description\": \"2018-10-24 13:15:28         DOC.N.00169-00011\", \"vatpercentage\": \"\", \"type\": \"97\", \"paymentid\": \"\", \"netamount\": 155, \"grossamount\": 155, \"vatvalue\": \"\", \"fiscalvoid\": \"0\", \"exemptioncode\": \"\", \"department\": \"\", \"signid\": \"1\", \"unitprice\": \"\", \"quantity\": \"\"}], \"document\": {\"docnumber\": \"11\", \"trxtotal\": 155, \"grandTotal\": 58872, \"docznumber\": \"169\", \"type_signature_id\": \"1\", \"dtime\": \"2018-10-24 13:15:28\", \"doctype\": \"1\", \"errSignature\": \"\", \"cashuuid\": \"AAAA0001\", \"referenceDocnumber\": \"-1\", \"vatcode\": \"88S25000036\", \"businessname\": \"\", \"fiscaloperator\": \"Operatore 1\", \"referenceClosurenumber\": \"-1\", \"referenceDtime\": \"\", \"prevSignature\": \"UfO7cJZVEykPv98OFJ1ohgIGP1gmtyR0oGhVcYL9JWY=\", \"fiscalcode\": \"88S25000036\"}, \"taxes\": [{\"vatpercentage\": 0, \"gross\": 5, \"tax\": 0, \"exemptioncode\": \"N5\"}, {\"vatpercentage\": 0, \"gross\": 150, \"tax\": 0, \"exemptioncode\": \"N6\"}]}", "qrData": {"shaMetadata": "q1oVevMX0L3ea7ibRNTVQ6IATPk1MRZFoO4TJNfmsJ4=", "addInfo": "", "signature": "qdapB2oNhZ+2fg1YFvPlRa3d6VIoud6fqmxMqP6ihHc="}}
+A9D6A9076A0D859FB67E0D5816F3E545ADDDE95228B9DE9FAA6C4CA8FEA28477
+#########################
+#########################
+#########################
+****RESPONSE****
+{"responseCode": 1003, "responseDesc": "Errore di conversione! [Errore HTTP 500] StringIndexOutOfBoundsException: String index out of range: 2"}
+****RESPONSE _ END****
+exit 12
+{'data': {'cashuuid': 'AAAA0001', 'dtime': '2018-10-24 13:15:28', 'amount': 59027, 'znum': 169}}
+****RESPONSE****
+{"responseCode":0,"responseErr":{"errCertExpired":0,"errCount":0,"errEjFull":0,"errEjPresent":0,"errFmFull":0,"errFmPresent":0,"errFmStatus":0,"errHwinitMax":0,"errMkeyPresent":0,"errMkeyValid":0,"warnCertExpired":0,"warnCount":0,"warnEjFull":0,"warnEjFullVal":0,"warnFmFull":0,"warnFmFullVal":0,"warnHwinitMax":0,"warnHwinitVal":0}}
+****RESPONSE _ END****

@@ -5,7 +5,7 @@ from datetime import datetime
 from datetime import timedelta
 import xml.etree.ElementTree as ET
 
-set_ip_apparato = "192.168.0.54"
+set_ip_apparato = "192.168.1.171"
 
 def xmltodate(xml):
 	root = ET.fromstring(xml)

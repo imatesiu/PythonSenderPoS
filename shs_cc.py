@@ -8,26 +8,20 @@ def send(msg,ip,port):
 	
 	
 	
-#ip = "192.168.1.28"
-ip = "146.48.89.150"
+ip = "192.168.1.2"
 port = 3001
 
 #messaggio = "\"ciao\"@"
 #messaggio = "J"
-onetoten = range(1,3)
-i = 0
+onetoten = range(1,8)
 for count in onetoten:
-	messaggio = "100H8R \"12345678\"53F  2T"
+	messaggio = "1F"
 	send(messaggio,ip,port)
 
 	#messaggio = "\"12345678\"53F"
 	#send(messaggio,ip,port)
 	#messaggio = "2T"
 	#send(messaggio,ip,port)
-	i+=1
-	print i 
-	time.sleep(3)
-
 	#messaggio = "2000H2T"
 	#send(messaggio,ip,port)
 	#print "2"
@@ -46,7 +40,7 @@ for count in onetoten:
 	#messaggio = "2000H1T"
 	#send(messaggio,ip,port)
 	#print "1"
-	time.sleep(2)
+	time.sleep(5)
 
 
 exit(0)

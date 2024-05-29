@@ -33,7 +33,7 @@ def calculatecrc(msg):
 		
 #opened_socket = conn(ip,port)	
 	
-ip = "146.48.89.30"
+ip = "192.168.1.206"
 #s = '3/S/%22 BENE//1/1/1///0/0/'
 #print calculatecrc(s)
 #exit(0)
@@ -51,7 +51,7 @@ def send2(msg):
 	opened_socket2.close()
   except Exception as e:
   	print str(e)
-opened_socket  = conn(ip,port)
+#opened_socket  = conn(ip,port)
 k=147
 
 init = '0x02'
@@ -66,22 +66,22 @@ Matricola = ""
 #reso
 i = 1 
 for cicli in range(1,2):
-	si = '02282f383703'
+	#si = '02282f383703'
 	#s= '\/80////1234567890/////////sseapid.isti.cnr.it/sseapid.isti.cnr.it//////'
 	#invia  =  s#.decode('hex')
-	send(si.decode('hex'))
+	#send2(si.decode('hex'))
 	s = '3/S/%22 BENE//1/1/1///0/0/'
 	invia  =  s#.decode('hex')
-	send(calculatecrc(invia).decode('hex'))
-	send(si.decode('hex'))
-	exit(0)
+	send2(calculatecrc(invia).decode('hex'))
+	#send2(si.decode('hex'))
+	#exit(0)
 	s= '5/1/0'
 	invia  =  s#.decode('hex')
-	send2(calculatecrc(invia))
+	send2(calculatecrc(invia).decode('hex'))
 	time.sleep(2)
 	s = 'x/7'
 	invia  =  s#.decode('hex')
-	send2(calculatecrc(invia))
+	send2(calculatecrc(invia).decode('hex'))
 	
 	
 exit(0)

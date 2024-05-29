@@ -67,7 +67,7 @@ class MiaApp:
 		
 		Label(self.mioContenitore1, text="Intervallo: ").grid(row=2,pady=5,sticky=W)
 		v = StringVar()
-		v.set("99SMM000989")
+		v.set("99SEA001000")
 		self.e1 = Entry(self.mioContenitore1,textvariable=v)
 		v1 = StringVar()
 		v1.set("192.168.1.136")#192.168.1.146

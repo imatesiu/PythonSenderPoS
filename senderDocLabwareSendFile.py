@@ -20,30 +20,21 @@ from xml.dom import minidom
 import requests
 import time
  
-ip = "146.48.89.60:8080"
+ip = "146.48.89.151:8080"
 urllabware = "http://"+ip+"/xonxoff_protocol.cgi"
  
 def send(raw_data):
     x = requests.post(urllabware,  data=raw_data)
     print(x)
+    print(x.text)
 
+import sys
+print ('argument list', sys.argv)
+name = sys.argv[1]
  
-for x in range(1):
-	inter = "\n"
-	datar = "#K#R1/$100/(BENE \"A\")#\"/?L/$1/(FL011074)#T4/(Pag. Elettronico|dati canale operazione)#c"   
-	data = datar.replace("#", inter+"#")
- 
-	#dataf = data[4:]
-	print(data)
-	send(data)
- 
-	#time.sleep(2)
-	#invio Chiusura Fiscale
- 
-	#datar = "#C3001"
-	#data = datar.replace("#", inter+"#")
-	#print(data)
-	#send(data)
- 
-	#time.sleep(2)
+f = open(name, "r")
+
+for n in range(2):
+	send(f.read())
+	print(n)
 

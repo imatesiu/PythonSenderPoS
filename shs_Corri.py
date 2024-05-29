@@ -6,10 +6,10 @@ def send(msg,ip,port):
 	print msg
 	opened_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	opened_socket.sendto(msg, (ip, port))
+	opened_socket.close()
 	
-	
-	
-ip = "192.168.1.48"
+ip = "192.168.1.144"
+#ip = "146.48.89.150"
 port = 3001
 
 #messaggio = "\"ciao\"@"
@@ -21,8 +21,8 @@ send(messaggio,ip,port)
 messaggio = "12201H7R"
 send(messaggio,ip,port)
 messaggio = "200H6R"
-messaggio = "\"12345678\"53F"
 send(messaggio,ip,port)
+messaggio = "\"12345678\"53F"
 send(messaggio,ip,port)
 messaggio = "700H6T"
 send(messaggio,ip,port)
@@ -163,9 +163,9 @@ send(messaggio,ip,port)
 messaggio = "4T"
 send(messaggio,ip,port)
 
-
-
-
+'''
+exit(0)
+'''
 #Modificatore per ACCONTO : 13M Esempio ACCONTO 5,00 Euro REPARTO 1 -> 
 messaggio = "500H13M1R"
 send(messaggio,ip,port)
@@ -174,6 +174,7 @@ send(messaggio,ip,port)
 messaggio = "1T"
 send(messaggio,ip,port)
 
+time.sleep(5)
 #Modificatore per OMAGGIO : 14M Esempio OMAGGIO 20,00 Euro REPARTO 3 ->
 messaggio = "2000H14M3R"
 send(messaggio,ip,port)
@@ -181,9 +182,11 @@ messaggio = "\"12345678\"53F"
 send(messaggio,ip,port)
 messaggio = "1T"
 send(messaggio,ip,port)
+time.sleep(5)
+
 
 #Funzione per DI CUI ACCONTO : 54F Esempio 10,00 Euro DI CUI ACCONTO -> 
-messaggio = "15000H1R"
+messaggio = "15000H2R"
 send(messaggio,ip,port)
 messaggio = "\"12345678\"53F"
 send(messaggio,ip,port)
@@ -191,9 +194,11 @@ messaggio = "1000H54F"
 send(messaggio,ip,port)
 messaggio = "1T"
 send(messaggio,ip,port)
+
+time.sleep(5)
  
 #Funzione per BUONO MONOUSO : 55F Esempio 10,00 Euro BUONO MONOUSO -> 
-messaggio = "1000H1R"
+messaggio = "1000H2R"
 send(messaggio,ip,port)
 messaggio = "\"12345678\"53F"
 send(messaggio,ip,port)

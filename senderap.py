@@ -11,32 +11,11 @@ def send(msg):
 	print msg
 	res = opened_socket.send(msg)
 	print res
-	data = opened_socket.recv(1024).encode('hex')
-	print data
 	
-def calculatecrc(msg):	
-	init = '02'
-	final = '03'
-	cks = 0
-	stringa = ''
-	for elem in msg:
-		cks += ord(elem)
-	cks = (cks & 255) % 100
-	stringa = msg + str(cks)
-	#print stringa
-	outHex = '02'
-	for element in stringa:
-		outHex += hex(ord(element))
-	
-	#print outHex + '03'
-	return (outHex + '03').replace("0x","").upper()
-		
+
 #opened_socket = conn(ip,port)	
 	
-ip = "146.48.89.30"
-#s = '3/S/%22 BENE//1/1/1///0/0/'
-#print calculatecrc(s)
-#exit(0)
+ip = "192.168.1.50"
 #ip = "192.168.1.237"
 port =9103
 
@@ -46,16 +25,14 @@ def send2(msg):
 	opened_socket2.connect((ip, port))
 	print msg
 	opened_socket2.send(msg)
-	data = opened_socket2.recv(1024).encode('hex')
+	data = opened_socket2.recv(1024).decode()
 	print data
 	opened_socket2.close()
   except Exception as e:
   	print str(e)
-opened_socket  = conn(ip,port)
+
 k=147
 
-init = '0x02'
-final = '0x03'
 
 #Lotteria
 #
@@ -66,22 +43,20 @@ Matricola = ""
 #reso
 i = 1 
 for cicli in range(1,2):
-	si = '02282f383703'
-	#s= '\/80////1234567890/////////sseapid.isti.cnr.it/sseapid.isti.cnr.it//////'
-	#invia  =  s#.decode('hex')
-	send(si.decode('hex'))
-	s = '3/S/%22 BENE//1/1/1///0/0/'
-	invia  =  s#.decode('hex')
-	send(calculatecrc(invia).decode('hex'))
-	send(si.decode('hex'))
-	exit(0)
-	s= '5/1/0'
-	invia  =  s#.decode('hex')
-	send2(calculatecrc(invia))
+	'''s = '023F2F313003'
+	s= '025C2F38302F2F2F2F313233343536373839302F2F2F2F2F2F2F2F2F737365617069642E697374692E636E722E69742F737365617069642E697374692E636E722E69742F2F2F2F2F2F363803'
+	invia  =  s.decode('hex')
+	send2(invia)'''
+	s = '02332F532F2532322042454E452F2F312F312F312F2F2F302F302F363503'
+	invia  =  s.decode('hex')
+	send2(invia)
+	s= '02352F312F30343403'
+	invia  =  s.decode('hex')
+	send2(invia)
 	time.sleep(2)
-	s = 'x/7'
-	invia  =  s#.decode('hex')
-	send2(calculatecrc(invia))
+	s = '02782F37323203'
+	invia  =  s.decode('hex')
+	send2(invia)
 	
 	
 exit(0)
