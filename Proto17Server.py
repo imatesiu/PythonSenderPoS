@@ -330,7 +330,7 @@ try:
             print("Ricevuti7: ")
             print(receivedData)
 
-         except KeyboardInterrupt:
+         except Exception as error: #(KeyboardInterrupt, ConnectionResetError, BrokenPipeError) as
            print('Server closing')
         newSocket.close()
         print("Disconnected from", address)
