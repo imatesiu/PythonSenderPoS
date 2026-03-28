@@ -40,11 +40,11 @@ opened_socket = conn(ip,port)
 onetoten = range(1,99)
 for count in onetoten:
 	send("150H3R")
-	send("\"1234567A\"38F")
+	#send("\"1234567A\"38F")
 	#send("=")
 
-	send("3T")
-	
+	send("1T")
+	send("z1Fc")
 	time.sleep(3)
 
 exit(0)

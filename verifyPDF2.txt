@@ -1,0 +1,55 @@
+import sys
+import chilkat
+
+#  This example requires the Chilkat Crypt API to have been previously unlocked.
+#  See Unlock Chilkat Crypt for sample code.
+
+crypt = chilkat.CkCrypt2()
+
+#  Tell the crypt object to use 3 certificates.
+#  Do this by calling AddEncryptCert for each certificate.
+
+#  Load a digital certificate.
+#  We don't need the private key for encryption.
+#  Only the public key is needed (which is included in a certificate).
+cert1 = chilkat.CkCert()
+success = cert1.LoadFromFile("qa_data/user1/cert_user1.pem")
+#  Assume success for the example, but make sure your application checks for success/failure...
+crypt.AddEncryptCert(cert1)
+
+cert2 = chilkat.CkCert()
+success = cert2.LoadFromFile("qa_data/user2/cert_user2.pem")
+crypt.AddEncryptCert(cert2)
+
+cert3 = chilkat.CkCert()
+success = cert3.LoadFromFile("qa_data/user3/cert_user3.pem")
+crypt.AddEncryptCert(cert3)
+
+#  Indicate that we want PKI encryption (i.e. public-key infrastructure)
+#  to produce a CMS message (Cryptographic Message Syntax/PKCS7),
+#  that is be created with RSAES-OAEP padding, SHA256, and AES-128 for the
+#  bulk encryption.
+crypt.put_CryptAlgorithm("pki")
+crypt.put_Pkcs7CryptAlg("aes")
+crypt.put_KeyLength(128)
+crypt.put_OaepHash("sha256")
+crypt.put_OaepPadding(True)
+
+#  Load the file to be encrypted...
+fileData = chilkat.CkBinData()
+success = fileData.LoadFile("qa_data/jpg/penguins.jpg")
+#  Your app should check for success/failure..
+
+#  Encrypt the data.  The contents of the fileData object are replaced with the PKCS7 encrypted message.
+success = crypt.EncryptBd(fileData)
+if (success != True):
+    print(crypt.lastErrorText())
+    sys.exit()
+
+#  Save the PKCS7 encrypted message to a file..
+success = fileData.WriteFile("qa_output/pkcs7_encrypted.p7")
+
+#  Now indicate that the PKCS7 output is to be returned in the base64 encoding.
+crypt.put_EncodingMode("base64")
+
+print("OK.")
